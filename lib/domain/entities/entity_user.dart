@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Represents the user credentials for authentication actions
 @immutable
 final class UserCredentials {
   /// Standard constructor

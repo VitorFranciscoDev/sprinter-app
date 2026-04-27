@@ -19,8 +19,7 @@ class _AuthenticationRepository implements AuthenticationRepository {
     UserCredentials credentials,
   ) async {
     final client = SentryHttpClient();
-    final url = Uri.parse('$baseURL/api/auth/login');
-
+    final url = Uri.parse('${BuildFlags.baseURL}/api/auth/login');
     try {
       final response = await client.post(
         url,
