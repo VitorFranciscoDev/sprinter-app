@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Base class representing authentication-related errors.
 sealed class AuthenticationError {
+  /// Standard constructor
   const AuthenticationError();
 }
 
