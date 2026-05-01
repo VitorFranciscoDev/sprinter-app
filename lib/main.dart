@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:sprinter/infrastructure/presentation/app_routes.dart';
 
 import 'build_flags.dart';
 
@@ -19,6 +20,10 @@ class SprinterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: Scaffold());
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: 'Sprinter',
+      routerConfig: routes,
+    );
   }
 }

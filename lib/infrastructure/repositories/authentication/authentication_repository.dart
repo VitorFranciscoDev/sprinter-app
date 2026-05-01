@@ -53,12 +53,15 @@ class _AuthenticationRepository implements AuthenticationRepository {
   @override
   Future<Result<void, AuthenticationError>> signInWithGoogle() async {
     try {
+      // Triggers the authentication flow
       final googleUser = await _googleSignIn.authenticate();
 
+      // Creates a new credential from idToken
       final credential = GoogleAuthProvider.credential(
         idToken: googleUser.authentication.idToken,
       );
 
+      // Sign in on firebase with the given credential
       await _firebaseAuth.signInWithCredential(credential);
       return Result.success(null);
     } on Exception catch (e) {
@@ -67,7 +70,7 @@ class _AuthenticationRepository implements AuthenticationRepository {
     }
   }
 
-  /// Generates a cryptographically secure random nonce string.
+  /// Generates a cryptographically secure random nonce string
   String _generateNonce([int length = 32]) {
     const charset =
         '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
@@ -112,14 +115,9 @@ class _AuthenticationRepository implements AuthenticationRepository {
 
     // Apple only sends the name on the FIRST sign-in.
     // We must update the Firebase profile manually.
-    final fullName = appleCredential.givenName != null
-        ? '${appleCredential.givenName} ${appleCredential.familyName ?? ''}'
-              .trim()
-        : null;
-
-    if (fullName != null && fullName.isNotEmpty) {
-      await userCredential.user?.updateDisplayName(fullName);
-    }
+    await userCredential.user?.updateDisplayName(
+      '${appleCredential.givenName} ${appleCredential.familyName ?? ''}'.trim(),
+    );
 
     return Result.success(null);
   }
