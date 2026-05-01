@@ -1,7 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
+import 'package:crypto/crypto.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:sprinter/build_flags.dart';
 import 'package:sprinter/domain/entities/entity_error.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
@@ -9,13 +14,21 @@ import 'package:sprinter/domain/entities/entity_user.dart';
 import 'package:sprinter/domain/entities/errors/authentication_error.dart';
 import 'package:sprinter/infrastructure/repositories/authentication/authentication_interface.dart';
 
-AuthenticationRepository newAuthenticationRepository() {
-  return _AuthenticationRepository();
+AuthenticationRepository newAuthenticationRepository(
+  FirebaseAuth firebaseAuth,
+  GoogleSignIn googleSignIn,
+) {
+  return _AuthenticationRepository(firebaseAuth, googleSignIn);
 }
 
 class _AuthenticationRepository implements AuthenticationRepository {
+  const _AuthenticationRepository(this._firebaseAuth, this._googleSignIn);
+
+  final FirebaseAuth _firebaseAuth;
+  final GoogleSignIn _googleSignIn;
+
   @override
-  Future<Result<void, AuthenticationError>> attemptLogin(
+  Future<Result<void, AuthenticationError>> signInWithEmailAndPassword(
     UserCredentials credentials,
   ) async {
     final client = SentryHttpClient();
@@ -45,5 +58,85 @@ class _AuthenticationRepository implements AuthenticationRepository {
     } finally {
       client.close();
     }
+  }
+
+  @override
+  Future<Result<void, AuthenticationError>> signInWithGoogle() async {
+    try {
+      final googleUser = await _googleSignIn.authenticate();
+
+      final credential = GoogleAuthProvider.credential(
+        idToken: googleUser.authentication.idToken,
+      );
+
+      await _firebaseAuth.signInWithCredential(credential);
+      return Result.success(null);
+    } on Exception catch (e) {
+      unawaited(Sentry.captureException(e));
+      rethrow;
+    }
+  }
+
+  /// Generates a cryptographically secure random nonce string.
+  String _generateNonce([int length = 32]) {
+    const charset =
+        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
+    final random = Random.secure();
+    return List.generate(
+      length,
+      (_) => charset[random.nextInt(charset.length)],
+    ).join();
+  }
+
+  /// Returns the SHA-256 hash of a string.
+  String _sha256ofString(String input) {
+    final bytes = utf8.encode(input);
+    final digest = sha256.convert(bytes);
+    return digest.toString();
+  }
+
+  @override
+  Future<Result<void, AuthenticationError>> signInWithApple() async {
+    // Generate a secure nonce to prevent replay attacks
+    final rawNonce = _generateNonce();
+    final hashedNonce = _sha256ofString(rawNonce);
+
+    // Trigger the Apple Sign-In flow
+    final appleCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+      nonce: hashedNonce,
+    );
+
+    // Create an OAuthCredential from the Apple credential
+    final oauthCredential = OAuthProvider(
+      'apple.com',
+    ).credential(idToken: appleCredential.identityToken, rawNonce: rawNonce);
+
+    // Sign in to Firebase
+    final userCredential = await _firebaseAuth.signInWithCredential(
+      oauthCredential,
+    );
+
+    // Apple only sends the name on the FIRST sign-in.
+    // We must update the Firebase profile manually.
+    final fullName = appleCredential.givenName != null
+        ? '${appleCredential.givenName} ${appleCredential.familyName ?? ''}'
+              .trim()
+        : null;
+
+    if (fullName != null && fullName.isNotEmpty) {
+      await userCredential.user?.updateDisplayName(fullName);
+    }
+
+    return Result.success(null);
+  }
+
+  @override
+  Future<Result<void, AuthenticationError>> signOut() async {
+    await _firebaseAuth.signOut();
+    return Result.success(null);
   }
 }

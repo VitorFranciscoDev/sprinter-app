@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
 import 'package:sprinter/domain/entities/errors/authentication_error.dart';
@@ -16,9 +17,34 @@ class _AuthenticationUseCase implements AuthenticationUseCase {
   final AuthenticationRepository _authenticationRepository;
 
   @override
-  Future<Result<void, AuthenticationError>> attemptLogin(
+  Future<Result<void, AuthenticationError>> signInWithEmailAndPassword(
     UserCredentials credentials,
   ) async {
-    return await _authenticationRepository.attemptLogin(credentials);
+    if (!EmailValidator.validate(credentials.email)) {
+      return Result.failure(InvalidEmailError('invalid email'));
+    }
+
+    if (credentials.password.length < 8) {
+      return Result.failure(InvalidPasswordError('invalid password'));
+    }
+
+    return await _authenticationRepository.signInWithEmailAndPassword(
+      credentials,
+    );
+  }
+
+  @override
+  Future<Result<void, AuthenticationError>> signInWithGoogle() async {
+    return await _authenticationRepository.signInWithGoogle();
+  }
+
+  @override
+  Future<Result<void, AuthenticationError>> signInWithApple() async {
+    return await _authenticationRepository.signInWithApple();
+  }
+
+  @override
+  Future<Result<void, AuthenticationError>> signOut() async {
+    return await _authenticationRepository.signOut();
   }
 }
