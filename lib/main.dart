@@ -4,6 +4,8 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'build_flags.dart';
 
 Future<void> main() async {
+  SentryWidgetsFlutterBinding.ensureInitialized();
+
   await SentryFlutter.init((options) {
     options.dsn = BuildFlags.sentryDSN;
     options.tracesSampleRate = 1.0;

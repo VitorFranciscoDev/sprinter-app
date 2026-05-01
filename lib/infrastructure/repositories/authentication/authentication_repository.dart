@@ -7,12 +7,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:sprinter/build_flags.dart';
 import 'package:sprinter/domain/entities/entity_error.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
 import 'package:sprinter/domain/entities/errors/authentication_error.dart';
 import 'package:sprinter/infrastructure/repositories/authentication/authentication_interface.dart';
+import 'package:sprinter/infrastructure/repositories/util.dart';
 
 AuthenticationRepository newAuthenticationRepository(
   FirebaseAuth firebaseAuth,
@@ -31,33 +31,23 @@ class _AuthenticationRepository implements AuthenticationRepository {
   Future<Result<void, AuthenticationError>> signInWithEmailAndPassword(
     UserCredentials credentials,
   ) async {
-    final client = SentryHttpClient();
-    final url = Uri.parse('${BuildFlags.baseURL}/api/auth/login');
+    final response = await StandardHttp.standardPostRequest(
+      endpoint: 'api/auth/login',
+      json: credentials.toJSON(),
+    );
 
-    try {
-      final response = await client.post(
-        url,
-        body: jsonEncode(credentials.toJSON()),
-      );
+    if (response.statusCode != 200) {
+      final errorResponse = ErrorResponse.fromJSON(jsonDecode(response.body));
 
-      if (response.statusCode != 200) {
-        final errorResponse = ErrorResponse.fromJSON(jsonDecode(response.body));
+      final error = switch (errorResponse.code) {
+        'INVALID_CREDENTIALS' => InvalidCredentials(errorResponse.message),
+        _ => UnknownAuthenticationError(errorResponse.message),
+      };
 
-        final error = switch (errorResponse.code) {
-          'INVALID_CREDENTIALS' => InvalidCredentials(errorResponse.message),
-          _ => UnknownAuthenticationError(errorResponse.message),
-        };
-
-        return Result.failure(error);
-      }
-
-      return Result.success(null);
-    } on Exception catch (e) {
-      unawaited(Sentry.captureException(e));
-      rethrow;
-    } finally {
-      client.close();
+      return Result.failure(error);
     }
+
+    return Result.success(null);
   }
 
   @override
