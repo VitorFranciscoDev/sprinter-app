@@ -10,8 +10,6 @@ abstract class AppRoutes {
 final routes = GoRouter(
   initialLocation: AppRoutes.login,
   routes: [
-    GoRoute(path: AppRoutes.welcome),
     GoRoute(path: AppRoutes.login, builder: (_, _) => const LoginScreen()),
-    GoRoute(path: AppRoutes.register),
   ],
 );
