@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
 }
 
 class _LoginScreenContent extends StatefulWidget {
-  const _LoginScreenContent({super.key});
+  const _LoginScreenContent();
 
   @override
   State<_LoginScreenContent> createState() => _LoginScreenContentState();
@@ -57,7 +57,7 @@ class _LoginScreenContentState extends State<_LoginScreenContent> {
                   'Log in the app to start to do activities',
                   style: TextStyle(
                     fontSize: 16,
-                    color: colorScheme.onSurface.withOpacity(0.6),
+                    color: colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
                 ),
 
@@ -118,7 +118,7 @@ class _LoginScreenContentState extends State<_LoginScreenContent> {
 }
 
 class _ForgotYourPassword extends StatelessWidget {
-  const _ForgotYourPassword({super.key});
+  const _ForgotYourPassword();
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +146,6 @@ class _ForgotYourPassword extends StatelessWidget {
 
 class _ExternalLoginButton extends StatelessWidget {
   const _ExternalLoginButton({
-    super.key,
     required this.callback,
     required this.platform,
   });
@@ -168,7 +167,7 @@ class _ExternalLoginButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 14),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
-            side: BorderSide(color: colorScheme.secondary.withOpacity(0.5)),
+            side: BorderSide(color: colorScheme.secondary.withValues(alpha: 0.5)),
           ),
           elevation: 0,
         ),

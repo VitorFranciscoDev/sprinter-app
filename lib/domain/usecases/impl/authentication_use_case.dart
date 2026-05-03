@@ -1,4 +1,3 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
 import 'package:sprinter/domain/errors/authentication_error.dart';

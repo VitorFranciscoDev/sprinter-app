@@ -21,7 +21,7 @@ class AuthenticationRedirectRow extends StatelessWidget {
           redirectToRegister ? 'Don\'t have an account?' : 'Already have an account?',
           style: TextStyle(
             fontSize: 14,
-            color: colorScheme.onSurface.withOpacity(0.6),
+            color: colorScheme.onSurface.withValues(alpha: 0.6),
           ),
         ),
         TextButton(

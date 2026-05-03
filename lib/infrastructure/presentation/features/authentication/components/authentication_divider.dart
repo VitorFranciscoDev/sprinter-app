@@ -9,14 +9,14 @@ class AuthenticationDivider extends StatelessWidget {
 
     return Row(
       children: [
-        Expanded(child: Divider(color: colorScheme.onSurface.withOpacity(0.3))),
+        Expanded(child: Divider(color: colorScheme.onSurface.withValues(alpha: 0.3))),
         const SizedBox(width: 16),
         Text(
           'or',
-          style: TextStyle(color: colorScheme.onSurface.withOpacity(0.5)),
+          style: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.5)),
         ),
         const SizedBox(width: 16),
-        Expanded(child: Divider(color: colorScheme.onSurface.withOpacity(0.3))),
+        Expanded(child: Divider(color: colorScheme.onSurface.withValues(alpha: 0.3))),
       ],
     );
   }

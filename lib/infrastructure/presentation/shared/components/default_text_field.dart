@@ -27,7 +27,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
       obscureText: widget.isPassword && _obscureText,
       decoration: InputDecoration(
         labelText: widget.label,
-        labelStyle: TextStyle(color: colorScheme.onSurface.withOpacity(0.7)),
+        labelStyle: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.7)),
         prefixIcon: Icon(widget.icon, color: colorScheme.primary),
         suffixIcon: widget.isPassword
             ? IconButton(
@@ -38,7 +38,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
                   _obscureText
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
-                  color: colorScheme.onSurface.withOpacity(0.6),
+                  color: colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
               )
             : null,
@@ -50,7 +50,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: colorScheme.secondary.withOpacity(0.5)),
+          borderSide: BorderSide(color: colorScheme.secondary.withValues(alpha: 0.5)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
