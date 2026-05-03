@@ -1,9 +1,11 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
-import 'package:sprinter/domain/entities/errors/authentication_error.dart';
-import 'package:sprinter/domain/usecases/authentication/authentication_interface.dart';
-import 'package:sprinter/infrastructure/repositories/authentication/authentication_interface.dart';
+import 'package:sprinter/domain/errors/authentication_error.dart';
+import 'package:sprinter/domain/rules/authentication_rules.dart';
+import 'package:sprinter/domain/usecases/authentication_interface.dart';
+
+import '../../../infrastructure/repositories/authentication_interface.dart';
 
 AuthenticationUseCase newAuthenticationUseCase(
   AuthenticationRepository authenticationRepository,
@@ -20,12 +22,14 @@ class _AuthenticationUseCase implements AuthenticationUseCase {
   Future<Result<void, AuthenticationError>> signInWithEmailAndPassword(
     UserCredentials credentials,
   ) async {
-    if (!EmailValidator.validate(credentials.email)) {
-      return Result.failure(InvalidEmailError('invalid email'));
+    final emailValid = AuthenticationRules.validateEmail(credentials.email);
+    if (emailValid is Failure) {
+      return emailValid;
     }
 
-    if (credentials.password.length < 8) {
-      return Result.failure(InvalidPasswordError('invalid password'));
+    final passwordValid = AuthenticationRules.validateEmail(credentials.email);
+    if (passwordValid is Failure) {
+      return passwordValid;
     }
 
     return await _authenticationRepository.signInWithEmailAndPassword(

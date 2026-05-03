@@ -1,6 +1,6 @@
 import '../../../domain/entities/entity_result.dart';
 import '../../../domain/entities/entity_user.dart';
-import '../../../domain/entities/errors/authentication_error.dart';
+import '../../domain/errors/authentication_error.dart';
 
 /// Defines the contract for authentication data operations
 abstract class AuthenticationRepository {

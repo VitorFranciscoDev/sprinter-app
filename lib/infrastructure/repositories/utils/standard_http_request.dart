@@ -4,9 +4,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-import '../../build_flags.dart';
+import '../../../build_flags.dart';
 
-final class StandardHttp {
+final class StandardHttpRequest {
   static Future<http.Response> standardGetRequest({
     required String endpoint,
     String? token,
@@ -30,7 +30,7 @@ final class StandardHttp {
     }
   }
 
-  static Future<http.Response> standardPostRequest<T>({
+  static Future<http.Response> standardPostRequest({
     required String endpoint,
     required Map<String, dynamic> json,
     String? token,
