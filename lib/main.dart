@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:sprinter/infrastructure/presentation/app_routes.dart';
+import 'package:sprinter/infrastructure/presentation/routes.dart';
 
 import 'build_flags.dart';
 

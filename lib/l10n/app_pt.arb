@@ -1,0 +1,11 @@
+{
+  "internalServerError": "Algo deu errado do nosso lado. Tente novamente mais tarde ou entre em contato com o suporte se o problema persistir.",
+  "badRequestError": "A requisição está malformada ou contém dados inválidos. Verifique os dados enviados e tente novamente.",
+  "notFoundError": "O recurso solicitado não pôde ser encontrado. Ele pode ter sido excluído ou nunca existiu.",
+  "invalidCredentialsError": "O e-mail ou senha informados estão incorretos. Verifique e tente novamente.",
+  "nameIsTooShortError": "O nome informado é muito curto. Use pelo menos o número mínimo de caracteres exigido.",
+  "nameIsTooLongError": "O nome informado excede o comprimento máximo permitido. Encurte-o e tente novamente.",
+  "invalidEmailError": "O endereço de e-mail informado não é válido. Insira um e-mail com formato correto (ex: usuario@exemplo.com).",
+  "weakPasswordError": "Sua senha é muito fraca. Use uma combinação de letras maiúsculas, minúsculas, números e caracteres especiais.",
+  "userAlreadyExistsError": "Já existe uma conta com este e-mail. Tente fazer login ou use um e-mail diferente para se cadastrar."
+}

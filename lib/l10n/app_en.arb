@@ -1,0 +1,11 @@
+{
+  "internalServerError": "Something went wrong on our end. Please try again later or contact support if the issue persists.",
+  "badRequestError": "The request was malformed or contains invalid data. Please check your input and try again.",
+  "notFoundError": "The requested resource could not be found. It may have been deleted or never existed.",
+  "invalidCredentialsError": "The email or password you entered is incorrect. Please double-check and try again.",
+  "nameIsTooShortError": "The name you entered is too short. Please use at least the minimum number of characters required.",
+  "nameIsTooLongError": "The name you entered exceeds the maximum allowed length. Please shorten it and try again.",
+  "invalidEmailError": "The email address you entered is not valid. Please enter a correctly formatted email (e.g. user@example.com).",
+  "weakPasswordError": "Your password is too weak. Use a mix of uppercase letters, lowercase letters, numbers, and special characters.",
+  "userAlreadyExistsError": "An account with this email address already exists. Try logging in instead, or use a different email to register."
+}

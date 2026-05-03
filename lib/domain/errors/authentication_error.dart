@@ -1,3 +1,5 @@
+import 'package:sprinter/l10n/app_localizations.dart';
+
 /// Represents authentication-related errors that can occur during user authentication flows
 enum AuthenticationError {
   /// A generic server-side failure occurred
@@ -25,5 +27,17 @@ enum AuthenticationError {
   weakPasswordError,
 
   /// An account with this email address already exists
-  userAlreadyExistsError,
+  userAlreadyExistsError;
+
+  String translate(AppLocalizations l10n) => switch (this) {
+    .internalServerError => l10n.internalServerError,
+    .badRequestError => l10n.badRequestError,
+    .notFoundError => l10n.notFoundError,
+    .invalidCredentialsError => l10n.invalidCredentialsError,
+    .nameIsTooShortError => l10n.nameIsTooShortError,
+    .nameIsTooLongError => l10n.nameIsTooLongError,
+    .invalidEmailError => l10n.invalidEmailError,
+    .weakPasswordError => l10n.weakPasswordError,
+    .userAlreadyExistsError => l10n.userAlreadyExistsError,
+  };
 }
