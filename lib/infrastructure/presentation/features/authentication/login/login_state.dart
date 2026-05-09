@@ -23,7 +23,7 @@ class LoginState with ChangeNotifier {
   /// Password field node
   final passwordNode = FocusNode();
 
-  Future<void> signInWithEmailAndPassword() async {
+  Future<void> attemptLogin() async {
     loading = true;
     error = null;
     notifyListeners();

@@ -8,4 +8,7 @@ abstract class AuthenticationRepository {
   Future<Result<void, AuthenticationError>> attemptLogin(
     UserCredentials credentials,
   );
+
+  /// Get user information from the given token
+  Future<Result<void, AuthenticationError>> getUserFromToken(String token);
 }

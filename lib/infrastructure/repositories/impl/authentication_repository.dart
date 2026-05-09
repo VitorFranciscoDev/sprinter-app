@@ -11,6 +11,7 @@ import '../authentication.dart';
 import '../webservices/authentication_web_service.dart';
 
 const _authToken = 'auth_token';
+const _currentUser = 'current_user';
 
 AuthenticationRepository newAuthenticationRepository(
   AuthenticationWS authenticationWS,
@@ -30,9 +31,10 @@ class _AuthenticationRepository implements AuthenticationRepository {
     UserCredentials credentials,
   ) async {
     final response = await _authenticationWS.attemptLogin(credentials);
+    final body = jsonDecode(response.body);
 
     if (response.statusCode != 200) {
-      final errorResponse = ErrorResponse.fromJSON(jsonDecode(response.body));
+      final errorResponse = ErrorResponse.fromJSON(body);
 
       return switch (errorResponse.code) {
         'INTERNAL_SERVER_ERROR' => Result.failure(.internalServerError),
@@ -43,9 +45,29 @@ class _AuthenticationRepository implements AuthenticationRepository {
       };
     }
 
-    final body = jsonDecode(response.body);
     await _storage.write(key: _authToken, value: body['token']);
+    return Result.success(null);
+  }
 
+  @override
+  Future<Result<void, AuthenticationError>> getUserFromToken(
+    String token,
+  ) async {
+    final response = await _authenticationWS.getUserFromToken(token);
+    final body = jsonDecode(response.body);
+
+    if (response.statusCode != 200) {
+      final errorResponse = ErrorResponse.fromJSON(body);
+
+      return switch (errorResponse.code) {
+        'INTERNAL_SERVER_ERROR' => Result.failure(.internalServerError),
+        'BAD_REQUEST' => Result.failure(.badRequestError),
+        'NOT_FOUND' => Result.failure(.notFoundError),
+        _ => Result.failure(.internalServerError),
+      };
+    }
+
+    await _storage.write(key: _currentUser, value: body);
     return Result.success(null);
   }
 }

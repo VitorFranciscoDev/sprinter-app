@@ -31,8 +31,6 @@ class _AuthenticationUseCase implements AuthenticationUseCase {
       return passwordValid;
     }
 
-    return await _authenticationRepository.attemptLogin(
-      credentials,
-    );
+    return await _authenticationRepository.attemptLogin(credentials);
   }
 }
