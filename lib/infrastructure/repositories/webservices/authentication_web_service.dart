@@ -12,4 +12,11 @@ class AuthenticationWS {
       json: credentials.toJSON(),
     );
   }
+
+  Future<http.Response> getMe(String token) async {
+  return await StandardHttpRequest.standardGetRequest(
+  endpoint: "api/auth/login",
+  token:token,
+  );
+}
 }

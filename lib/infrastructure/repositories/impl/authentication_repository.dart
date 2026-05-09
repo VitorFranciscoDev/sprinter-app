@@ -4,12 +4,14 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:sprinter/domain/entities/entity_error.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
+import 'package:sprinter/infrastructure/storage/storage_keys.dart';
 
 import '../../../domain/errors/authentication_error.dart';
 import '../authentication_interface.dart';
@@ -19,11 +21,13 @@ AuthenticationRepository newAuthenticationRepository(
   AuthenticationWS authenticationWS,
   FirebaseAuth firebaseAuth,
   GoogleSignIn googleSignIn,
+  FlutterSecureStorage secureStorage,
 ) {
   return _AuthenticationRepository(
     authenticationWS,
     firebaseAuth,
     googleSignIn,
+    secureStorage,
   );
 }
 
@@ -32,11 +36,13 @@ class _AuthenticationRepository implements AuthenticationRepository {
     this._authenticationWS,
     this._firebaseAuth,
     this._googleSignIn,
+    this._secureStorage,
   );
 
   final AuthenticationWS _authenticationWS;
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
+  final  FlutterSecureStorage _secureStorage;
 
   @override
   Future<Result<void, AuthenticationError>> signInWithEmailAndPassword(
@@ -57,6 +63,10 @@ class _AuthenticationRepository implements AuthenticationRepository {
         _ => Result.failure(.internalServerError),
       };
     }
+
+    final body = jsonDecode(response.body) as Map<String, dynamic>;
+    final token = body['token'] as String;
+    await _secureStorage.write(key: StorageKeys.authToken, value: token);
 
     return Result.success(null);
   }
