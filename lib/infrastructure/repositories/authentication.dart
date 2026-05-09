@@ -5,7 +5,7 @@ import '../../domain/errors/authentication_error.dart';
 /// Defines the contract for authentication data operations
 abstract class AuthenticationRepository {
   /// Attempts to do login in the app with email and password
-  Future<Result<void, AuthenticationError>> signInWithEmailAndPassword(
+  Future<Result<void, AuthenticationError>> attemptLogin(
     UserCredentials credentials,
   );
 }

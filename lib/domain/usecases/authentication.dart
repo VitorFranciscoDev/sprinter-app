@@ -6,7 +6,7 @@ import '../errors/authentication_error.dart';
 /// Defines the contract for authentication-related business logic
 abstract class AuthenticationUseCase {
   /// Attempts to do login in the app with email and password
-  Future<Result<void, AuthenticationError>> signInWithEmailAndPassword(
+  Future<Result<void, AuthenticationError>> attemptLogin(
     UserCredentials credentials,
   );
 }
