@@ -9,6 +9,11 @@ abstract class AuthenticationRepository {
     UserCredentials credentials,
   );
 
+    // Attempts to register the user with email and password
+    Future<Result<void, AuthenticationError>> attemptRegister(
+    UserCredentials credentials,
+  );
+
   /// Get user information from the given token
   Future<Result<void, AuthenticationError>> getUserFromToken(String token);
 }

@@ -26,11 +26,29 @@ class _AuthenticationUseCase implements AuthenticationUseCase {
       return emailValid;
     }
 
-    final passwordValid = AuthenticationRules.validateEmail(credentials.email);
+    final passwordValid = AuthenticationRules.validatePassword(credentials.password);
     if (passwordValid is Failure) {
       return passwordValid;
     }
 
     return await _authenticationRepository.attemptLogin(credentials);
+  }
+  
+  @override
+  Future<Result<void, AuthenticationError>> attemptRegister(
+    UserCredentials credentials,
+    ) async {
+     final emailValid = AuthenticationRules.validateEmail(credentials.email);
+    if (emailValid is Failure) {
+      return emailValid;
+    }
+
+    final passwordValid = AuthenticationRules.validatePassword(credentials.password);
+    if (passwordValid is Failure) {
+      return passwordValid;
+    }
+
+    return await _authenticationRepository.attemptRegister(credentials);
+
   }
 }

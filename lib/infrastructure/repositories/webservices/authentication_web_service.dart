@@ -17,4 +17,11 @@ class AuthenticationWS {
       token: token,
     );
   }
+
+  Future<http.Response> attemptRegister(UserCredentials credentials) async {
+    return await StandardHttpRequest.standardPostRequest(
+      endpoint: 'api/auth/register',
+      json: credentials.toJSON(),
+    );
+  }
 }
