@@ -58,22 +58,4 @@ class _AuthenticationRepository implements AuthenticationRepository {
 
     return Result.success(null);
   }
-
-  /// Generates a cryptographically secure random nonce string
-  String _generateNonce([int length = 32]) {
-    const charset =
-        '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';
-    final random = Random.secure();
-    return List.generate(
-      length,
-      (_) => charset[random.nextInt(charset.length)],
-    ).join();
-  }
-
-  /// Returns the SHA-256 hash of a string.
-  String _sha256ofString(String input) {
-    final bytes = utf8.encode(input);
-    final digest = sha256.convert(bytes);
-    return digest.toString();
-  }
 }
