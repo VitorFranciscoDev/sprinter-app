@@ -3,15 +3,12 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:sprinter/domain/entities/entity_error.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
-import 'package:sprinter/infrastructure/storage/storage_keys.dart';
+import 'package:sprinter/infrastructure/storage/storage_keys_interface.dart';
 
 import '../../../domain/errors/authentication_error.dart';
 import '../authentication_interface.dart';
@@ -19,30 +16,22 @@ import '../webservices/authentication_web_service.dart';
 
 AuthenticationRepository newAuthenticationRepository(
   AuthenticationWS authenticationWS,
-  FirebaseAuth firebaseAuth,
-  GoogleSignIn googleSignIn,
-  FlutterSecureStorage secureStorage,
+  FlutterSecureStorage storage,
 ) {
   return _AuthenticationRepository(
     authenticationWS,
-    firebaseAuth,
-    googleSignIn,
-    secureStorage,
+    storage,
   );
 }
 
 class _AuthenticationRepository implements AuthenticationRepository {
   const _AuthenticationRepository(
     this._authenticationWS,
-    this._firebaseAuth,
-    this._googleSignIn,
-    this._secureStorage,
+    this._storage,
   );
 
   final AuthenticationWS _authenticationWS;
-  final FirebaseAuth _firebaseAuth;
-  final GoogleSignIn _googleSignIn;
-  final  FlutterSecureStorage _secureStorage;
+  final  FlutterSecureStorage _storage;
 
   @override
   Future<Result<void, AuthenticationError>> signInWithEmailAndPassword(
@@ -64,31 +53,10 @@ class _AuthenticationRepository implements AuthenticationRepository {
       };
     }
 
-    final body = jsonDecode(response.body) as Map<String, dynamic>;
-    final token = body['token'] as String;
-    await _secureStorage.write(key: StorageKeys.authToken, value: token);
+    final body = jsonDecode(response.body);
+    await _storage.write(key: StorageKeys.authToken, value: body['token']);
 
     return Result.success(null);
-  }
-
-  @override
-  Future<Result<void, AuthenticationError>> signInWithGoogle() async {
-    try {
-      // Triggers the authentication flow
-      final googleUser = await _googleSignIn.authenticate();
-
-      // Creates a new credential from idToken
-      final credential = GoogleAuthProvider.credential(
-        idToken: googleUser.authentication.idToken,
-      );
-
-      // Sign in on firebase with the given credential
-      await _firebaseAuth.signInWithCredential(credential);
-      return Result.success(null);
-    } on Exception catch (e) {
-      unawaited(Sentry.captureException(e));
-      rethrow;
-    }
   }
 
   /// Generates a cryptographically secure random nonce string
@@ -107,45 +75,5 @@ class _AuthenticationRepository implements AuthenticationRepository {
     final bytes = utf8.encode(input);
     final digest = sha256.convert(bytes);
     return digest.toString();
-  }
-
-  @override
-  Future<Result<void, AuthenticationError>> signInWithApple() async {
-    // Generate a secure nonce to prevent replay attacks
-    final rawNonce = _generateNonce();
-    final hashedNonce = _sha256ofString(rawNonce);
-
-    // Trigger the Apple Sign-In flow
-    final appleCredential = await SignInWithApple.getAppleIDCredential(
-      scopes: [
-        AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
-      ],
-      nonce: hashedNonce,
-    );
-
-    // Create an OAuthCredential from the Apple credential
-    final oauthCredential = OAuthProvider(
-      'apple.com',
-    ).credential(idToken: appleCredential.identityToken, rawNonce: rawNonce);
-
-    // Sign in to Firebase
-    final userCredential = await _firebaseAuth.signInWithCredential(
-      oauthCredential,
-    );
-
-    // Apple only sends the name on the FIRST sign-in.
-    // We must update the Firebase profile manually.
-    await userCredential.user?.updateDisplayName(
-      '${appleCredential.givenName} ${appleCredential.familyName ?? ''}'.trim(),
-    );
-
-    return Result.success(null);
-  }
-
-  @override
-  Future<Result<void, AuthenticationError>> signOut() async {
-    await _firebaseAuth.signOut();
-    return Result.success(null);
   }
 }

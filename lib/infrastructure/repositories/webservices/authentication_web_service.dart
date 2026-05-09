@@ -13,10 +13,10 @@ class AuthenticationWS {
     );
   }
 
-  Future<http.Response> getMe(String token) async {
-  return await StandardHttpRequest.standardGetRequest(
-  endpoint: "api/auth/login",
-  token:token,
-  );
-}
+  Future<http.Response> getUserFromToken(String token) async {
+    return await StandardHttpRequest.standardGetRequest(
+      endpoint: "api/auth/login",
+      token:token,
+    );
+  }
 }
