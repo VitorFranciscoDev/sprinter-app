@@ -35,19 +35,4 @@ class _AuthenticationUseCase implements AuthenticationUseCase {
       credentials,
     );
   }
-
-  @override
-  Future<Result<void, AuthenticationError>> signInWithGoogle() async {
-    return await _authenticationRepository.signInWithGoogle();
-  }
-
-  @override
-  Future<Result<void, AuthenticationError>> signInWithApple() async {
-    return await _authenticationRepository.signInWithApple();
-  }
-
-  @override
-  Future<Result<void, AuthenticationError>> signOut() async {
-    return await _authenticationRepository.signOut();
-  }
 }
