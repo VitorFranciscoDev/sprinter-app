@@ -21,14 +21,9 @@ class _AuthenticationUseCase implements AuthenticationUseCase {
   Future<Result<void, AuthenticationError>> attemptLogin(
     UserCredentials credentials,
   ) async {
-    final emailValid = AuthenticationRules.validateEmail(credentials.email);
-    if (emailValid is Failure) {
-      return emailValid;
-    }
-
-    final passwordValid = AuthenticationRules.validatePassword(credentials.password);
-    if (passwordValid is Failure) {
-      return passwordValid;
+    final credentialsValid=AuthenticationRules.validateLogin(credentials);
+    if(credentialsValid is Failure){
+      return credentialsValid;
     }
 
     return await _authenticationRepository.attemptLogin(credentials);
@@ -38,14 +33,9 @@ class _AuthenticationUseCase implements AuthenticationUseCase {
   Future<Result<void, AuthenticationError>> attemptRegister(
     UserCredentials credentials,
     ) async {
-     final emailValid = AuthenticationRules.validateEmail(credentials.email);
-    if (emailValid is Failure) {
-      return emailValid;
-    }
-
-    final passwordValid = AuthenticationRules.validatePassword(credentials.password);
-    if (passwordValid is Failure) {
-      return passwordValid;
+    final credentialsValid=AuthenticationRules.validateRegister(credentials);
+    if(credentialsValid is Failure){
+      return credentialsValid;
     }
 
     return await _authenticationRepository.attemptRegister(credentials);

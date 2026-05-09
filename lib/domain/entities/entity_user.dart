@@ -25,7 +25,9 @@ final class User {
 @immutable
 final class UserCredentials {
   /// Standard constructor
-  const UserCredentials({required this.email, required this.password});
+  const UserCredentials({required this.email, required this.password,this.name=""});
+  /// Name of the user
+  final String name;
 
   /// Email of the user
   final String email;
