@@ -15,10 +15,8 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   sentry_flutter: ^9.19.0
-  firebase_auth: ^6.4.0
+  flutter_secure_storage: ^10.0.0
   firebase_core: ^4.7.0
-  google_sign_in: ^7.2.0
-  sign_in_with_apple: ^7.0.1
   crypto: ^3.0.7
   email_validator: ^3.0.0
   http: ^1.6.0
