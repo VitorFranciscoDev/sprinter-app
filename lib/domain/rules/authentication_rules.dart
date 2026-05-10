@@ -19,7 +19,11 @@ class AuthenticationRules {
   }
 
   static Result<void,AuthenticationError> validateRegister(UserCredentials credentials){
-    
+    final nameResult=_validateName(credentials.name!);
+    if(nameResult is Failure){
+       return nameResult;
+    }
+
     final emailResult=_validateEmail(credentials.email);
     if (emailResult is Failure){
       return emailResult;
