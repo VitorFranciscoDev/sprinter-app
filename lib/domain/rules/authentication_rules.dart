@@ -19,10 +19,12 @@ class AuthenticationRules {
   }
 
   static Result<void,AuthenticationError> validateRegister(UserCredentials credentials){
-    var nameResult=validateName(credentials.name);
-    if(nameResult is Failure){
-      return nameResult;
-    }
+   if(credentials.name!=null){
+    var nameResult=validateName(credentials.name!);
+      if(nameResult is Failure){
+       return nameResult;
+      }
+   }
 
     var emailResult=validateEmail(credentials.email);
     if (emailResult is Failure){
@@ -38,9 +40,6 @@ class AuthenticationRules {
   }
 
   static Result<void, AuthenticationError> validateName(String name) {
-    if(name.isEmpty){
-      return Result.success(null);
-    }
     if (name.length < 3) {
       return Result.failure(.nameIsTooShortError);
     }
