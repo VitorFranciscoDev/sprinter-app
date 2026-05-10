@@ -17,11 +17,17 @@ class RegisterState with ChangeNotifier{
   /// Password field controller
   final passwordController = TextEditingController();
 
+  /// Name field controller
+  final nameController = TextEditingController();
+
   /// Email field node
   final emailNode = FocusNode();
 
   /// Password field node
   final passwordNode = FocusNode();
+
+  /// Name field node
+  final nameNode = FocusNode();
 
   Future<void> attemptRegister() async {
     loading = true;

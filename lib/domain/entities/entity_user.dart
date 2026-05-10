@@ -25,15 +25,16 @@ final class User {
 @immutable
 final class UserCredentials {
   /// Standard constructor
-  const UserCredentials({required this.email, required this.password,this.name=""});
-  /// Name of the user
-  final String? name;
-
+  const UserCredentials({required this.email, required this.password, this.name});
   /// Email of the user
   final String email;
 
   /// Password of the user
   final String password;
+
+  /// Name of the user
+  final String? name;
+
 
   /// Returns JSON from [UserCredentials]
   Map<String, dynamic> toJSON() {

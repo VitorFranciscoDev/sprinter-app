@@ -75,7 +75,7 @@ class _AuthenticationRepository implements AuthenticationRepository {
   Future<Result<void, AuthenticationError>> attemptRegister(
     UserCredentials credentials,
     ) async {
-       final response = await _authenticationWS.attemptLogin(credentials);
+       final response = await _authenticationWS.attemptRegister(credentials);
     final body = jsonDecode(response.body);
 
     if (response.statusCode != 200) {
