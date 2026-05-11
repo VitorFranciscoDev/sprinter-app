@@ -32,7 +32,11 @@ Backend repository: [Gsdagustavo/sprinter-api](https://github.com/Gsdagustavo/sp
 lib/
   build_flags.dart                         # --dart-define values
   main.dart                                # app bootstrap, Sentry, router, theme
-  domain/                                  # entities, rules, errors, use cases
+  domain/
+    entities/                              # core domain models and result types
+    errors/                                # domain error enums and localization helpers
+    rules/                                 # client-side business validation rules
+    usecases/                              # business logic contracts and implementations
   infrastructure/
     repositories/                          # API repositories and web services
     presentation/                          # routes, theme, screens, shared widgets
