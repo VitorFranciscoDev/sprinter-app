@@ -5,6 +5,7 @@
   "invalidCredentialsError": "O e-mail ou senha informados estão incorretos. Verifique e tente novamente.",
   "nameIsTooShortError": "O nome informado é muito curto. Use pelo menos o número mínimo de caracteres exigido.",
   "nameIsTooLongError": "O nome informado excede o comprimento máximo permitido. Encurte-o e tente novamente.",
+  "biographyIsTooLongError": "A biografia informada excede o comprimento máximo permitido. Encurte-a e tente novamente.",
   "invalidEmailError": "O endereço de e-mail informado não é válido. Insira um e-mail com formato correto (ex: usuario@exemplo.com).",
   "weakPasswordError": "Sua senha é muito fraca. Use uma combinação de letras maiúsculas, minúsculas, números e caracteres especiais.",
   "userAlreadyExistsError": "Já existe uma conta com este e-mail. Tente fazer login ou use um e-mail diferente para se cadastrar."
