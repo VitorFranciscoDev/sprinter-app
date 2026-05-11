@@ -33,6 +33,10 @@ class AppLocalizationsPt extends AppLocalizations {
       'O nome informado excede o comprimento máximo permitido. Encurte-o e tente novamente.';
 
   @override
+  String get biographyIsTooLongError =>
+      'A biografia informada excede o comprimento máximo permitido. Encurte-a e tente novamente.';
+  
+  @override
   String get invalidEmailError =>
       'O endereço de e-mail informado não é válido. Insira um e-mail com formato correto (ex: usuario@exemplo.com).';
 

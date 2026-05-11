@@ -36,6 +36,28 @@ class AuthenticationRules {
     return Result.failure(.weakPasswordError);
   }
 
+  static Result<void, AuthenticationError> _validateUsername(String username) {
+    if (username.length < 3) {
+      return Result.failure(.nameIsTooShortError);
+    }
+
+    if (username.length > 32) {
+      return Result.failure(.nameIsTooLongError);
+    }
+
+    return Result.success(null);
+  }
+
+  static Result<void, AuthenticationError> _validateBiography(
+    String biography,
+  ) {
+    if (biography.length > 255) {
+      return Result.failure(.biographyIsTooLongError);
+    }
+
+    return Result.success(null);
+  }
+
   static Result<void, AuthenticationError> validateLogin(
     UserCredentials credentials,
   ) {
@@ -68,6 +90,22 @@ class AuthenticationRules {
     final passwordResult = _validatePassword(credentials.password);
     if (passwordResult is Failure) {
       return passwordResult;
+    }
+
+    return Result.success(null);
+  }
+
+  static Result<void, AuthenticationError> validateCompleteRegister(
+    UserInformation informations,
+  ) {
+    final usernameResult = _validateUsername(informations.username);
+    if (usernameResult is Failure) {
+      return usernameResult;
+    }
+
+    final biographyResult = _validateBiography(informations.biography);
+    if (biographyResult is Failure) {
+      return biographyResult;
     }
 
     return Result.success(null);
