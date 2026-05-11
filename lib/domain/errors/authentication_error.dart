@@ -20,7 +20,7 @@ enum AuthenticationError {
   /// The provided name is too long
   nameIsTooLongError,
 
-  /// The providade biography is too long
+  /// The provided biography is too long
   biographyIsTooLongError,
 
   /// The email address provided is not in a valid format

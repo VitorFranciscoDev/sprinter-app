@@ -136,10 +136,10 @@ abstract class AppLocalizations {
   /// **'The name you entered exceeds the maximum allowed length. Please shorten it and try again.'**
   String get nameIsTooLongError;
 
-   /// No description provided for @biographyIsTooLongError.
+  /// No description provided for @biographyIsTooLongError.
   ///
   /// In en, this message translates to:
-  /// **'The name you entered exceeds the maximum allowed length. Please shorten it and try again.'**
+  /// **'The biography you entered exceeds the maximum allowed length. Please shorten it and try again.'**
   String get biographyIsTooLongError;
 
   /// No description provided for @invalidEmailError.
