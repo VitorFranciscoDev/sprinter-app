@@ -21,24 +21,23 @@ class _AuthenticationUseCase implements AuthenticationUseCase {
   Future<Result<void, AuthenticationError>> attemptLogin(
     UserCredentials credentials,
   ) async {
-    final credentialsValid=AuthenticationRules.validateLogin(credentials);
-    if(credentialsValid is Failure){
-      return credentialsValid;
+    final validCredentials = AuthenticationRules.validateLogin(credentials);
+    if (validCredentials is Failure) {
+      return validCredentials;
     }
 
     return await _authenticationRepository.attemptLogin(credentials);
   }
-  
+
   @override
   Future<Result<void, AuthenticationError>> attemptRegister(
     UserCredentials credentials,
-    ) async {
-    final credentialsValid=AuthenticationRules.validateRegister(credentials);
-    if(credentialsValid is Failure){
-      return credentialsValid;
+  ) async {
+    final validCredentials = AuthenticationRules.validateRegister(credentials);
+    if (validCredentials is Failure) {
+      return validCredentials;
     }
 
     return await _authenticationRepository.attemptRegister(credentials);
-
   }
 }

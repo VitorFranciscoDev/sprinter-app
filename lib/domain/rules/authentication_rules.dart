@@ -4,39 +4,6 @@ import 'package:sprinter/domain/entities/entity_user.dart';
 import 'package:sprinter/domain/errors/authentication_error.dart';
 
 class AuthenticationRules {
-  static Result<void,AuthenticationError> validateLogin(UserCredentials credentials){
-    final emailResult=_validateEmail(credentials.email);
-    if (emailResult is Failure){
-      return emailResult;
-    }
-
-    final passwordResult=_validatePassword(credentials.password);
-    if(passwordResult is Failure){
-      return passwordResult;
-    }
-
-    return Result.success(null);
-  }
-
-  static Result<void,AuthenticationError> validateRegister(UserCredentials credentials){
-    final nameResult=_validateName(credentials.name!);
-    if(nameResult is Failure){
-       return nameResult;
-    }
-
-    final emailResult=_validateEmail(credentials.email);
-    if (emailResult is Failure){
-      return emailResult;
-    }
-
-    final passwordResult=_validatePassword(credentials.password);
-    if(passwordResult is Failure){
-      return passwordResult;
-    }
-
-    return Result.success(null);
-  }
-
   static Result<void, AuthenticationError> _validateName(String name) {
     if (name.length < 3) {
       return Result.failure(.nameIsTooShortError);
@@ -67,5 +34,42 @@ class AuthenticationRules {
     }
 
     return Result.failure(.weakPasswordError);
+  }
+
+  static Result<void, AuthenticationError> validateLogin(
+    UserCredentials credentials,
+  ) {
+    final emailResult = _validateEmail(credentials.email);
+    if (emailResult is Failure) {
+      return emailResult;
+    }
+
+    final passwordResult = _validatePassword(credentials.password);
+    if (passwordResult is Failure) {
+      return passwordResult;
+    }
+
+    return Result.success(null);
+  }
+
+  static Result<void, AuthenticationError> validateRegister(
+    UserCredentials credentials,
+  ) {
+    final nameResult = _validateName(credentials.name!);
+    if (nameResult is Failure) {
+      return nameResult;
+    }
+
+    final emailResult = _validateEmail(credentials.email);
+    if (emailResult is Failure) {
+      return emailResult;
+    }
+
+    final passwordResult = _validatePassword(credentials.password);
+    if (passwordResult is Failure) {
+      return passwordResult;
+    }
+
+    return Result.success(null);
   }
 }

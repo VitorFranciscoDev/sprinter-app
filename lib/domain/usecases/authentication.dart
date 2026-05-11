@@ -9,7 +9,8 @@ abstract class AuthenticationUseCase {
   Future<Result<void, AuthenticationError>> attemptLogin(
     UserCredentials credentials,
   );
-  // Attempts to register the user in the app with email and password
+
+  /// Attempts to register the user in the app with the given credentials
   Future<Result<void, AuthenticationError>> attemptRegister(
     UserCredentials credentials,
   );
