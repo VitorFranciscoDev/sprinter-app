@@ -121,7 +121,7 @@ class _AuthenticationRepository implements AuthenticationRepository {
     final currentUser = User.fromJSON(jsonDecode(stored));
     await _storage.write(
       key: _currentUser,
-      value: jsonEncode(currentUser.toJSON()),
+      value: jsonEncode(currentUser),
     );
 
     return Result.success(null);

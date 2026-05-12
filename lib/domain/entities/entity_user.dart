@@ -4,7 +4,14 @@ import 'package:flutter/material.dart';
 @immutable
 final class User {
   /// Standard constructor
-  const User({required this.id, required this.name, required this.email, required this.username, required this.biography, required this.imageUrl});
+  const User({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.username,
+    required this.biography,
+    required this.imageURL
+  });
 
   /// Unique identifier for the user
   final int id;
@@ -15,23 +22,24 @@ final class User {
   /// Email of the user
   final String email;
 
-    /// Username of the user profile
+  /// Username of the user profile
   final String username;
 
   /// Biography of the user profile
   final String biography;
 
-  /// ImageUrl of the user profile
-  final String imageUrl;
+  /// Profile picture of the user
+  final String imageURL;
 
   /// Returns a [User] from the given JSON
   factory User.fromJSON(Map<String, dynamic> json) {
-    return User(id: json['id'], name: json['name'], email: json['email'], username: json['username'], imageUrl: json['imageUrl'], biography: json['biography']);
-  }
-
-  /// Returns JSON from [User]
-  Map<String, dynamic> toJSON() {
-    return {'name': name, 'email': email, 'username':username,'biography':biography,'imageurl':imageUrl};
+    return User(
+      id: json['id'],
+      name: json['name'], 
+      email: json['email'], 
+      username: json['username'], 
+      imageURL: json['imageURL'], 
+      biography: json['biography']);
   }
 }
 
@@ -62,13 +70,12 @@ final class UserCredentials {
 
 /// Represents the user information for the profile
 @immutable
-
 final class UserInformation{
   /// Standard constructor
   const UserInformation({
     required this.username,
     required this.biography, 
-    required this.imageUrl});
+    required this.imageBytes});
 
   /// Username of the user profile
   final String username;
@@ -76,11 +83,15 @@ final class UserInformation{
   /// Biography of the user profile
   final String biography;
 
-  /// ImageUrl of the user profile
-  final String imageUrl;
+  /// Profile picture of the user
+  final String imageBytes;
 
   /// Returns JSON from [UserInformation]
   Map<String,dynamic> toJSON() {
-    return {'username':username,'biography':biography,'imageurl':imageUrl};
+    return {
+      'username':username,
+      'biography':biography,
+      'image_bytes':imageBytes
+      };
   }
 }
