@@ -13,36 +13,36 @@ Thanks for contributing to Sprinter. This guide keeps branch names, commits, and
 
 Use a short prefix followed by a descriptive snake_case name.
 
-| Prefix | Use for | Example |
-| --- | --- | --- |
-| `ft_` | New features | `ft_login_screen` |
-| `rf_` | Refactors | `rf_auth_service` |
-| `ch_` | Chores, dependencies, configs, tooling | `ch_update_packages` |
-| `fx_` | Bug fixes | `fx_crash_on_startup` |
-| `dc_` | Documentation | `dc_readme` |
-| `ts_` | Tests | `ts_auth_unit` |
-| `ci_` | CI/CD changes | `ci_github_actions` |
+| Prefix | Use for | Example                |
+|--------| --- |------------------------|
+| `ft_`  | New features | `ft_login_screen`      |
+| `rf_`  | Refactors | `rf_auth_service`      |
+| `ch_`  | Chores, dependencies, configs, tooling | `ch_update_packages`   |
+| `fix_` | Bug fixes | `fix_crash_on_startup` |
+| `dc_`  | Documentation | `dc_readme`            |
+| `ts_`  | Tests | `ts_auth_unit`         |
+| `ci_`  | CI/CD changes | `ci_github_actions`    |
 
 ## Commit Messages
 
 Use this format:
 
 ```text
-type(scope): Short description
+type(issue): Short description
 ```
 
 Examples:
 
 ```text
-feature(auth): Add Google sign-in support
-fix(home): Resolve overflow on small screens
-chore(deps): Bump Flutter dependencies
-refactor(api): Simplify HTTP client setup
-docs(readme): Update setup instructions
-test(auth): Add unit tests for login flow
-style(theme): Apply new color tokens
-performance(feed): Lazy load images on scroll
-ci(workflow): Add Flutter analyze step
+feature(8): Add Google sign-in support
+fix(14): Resolve overflow on small screens
+chore(27): Bump Flutter dependencies
+refactor(96): Simplify HTTP client setup
+docs(139): Update setup instructions
+test(372): Add unit tests for login flow
+style(234): Apply new color tokens
+performance(210): Lazy load images on scroll
+ci(753): Add Flutter analyze step
 ```
 
 Keep the subject line under 72 characters. Use the commit body for context, tradeoffs, or migration notes when needed.
