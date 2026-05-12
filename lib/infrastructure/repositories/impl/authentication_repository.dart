@@ -70,4 +70,27 @@ class _AuthenticationRepository implements AuthenticationRepository {
     await _storage.write(key: _currentUser, value: body);
     return Result.success(null);
   }
+
+  @override
+  Future<Result<void, AuthenticationError>> attemptRegister(
+    UserCredentials credentials,
+  ) async {
+    final response = await _authenticationWS.attemptRegister(credentials);
+    final body = jsonDecode(response.body);
+
+    if (response.statusCode != 200) {
+      final errorResponse = ErrorResponse.fromJSON(body);
+
+      return switch (errorResponse.code) {
+        'INTERNAL_SERVER_ERROR' => Result.failure(.internalServerError),
+        'BAD_REQUEST' => Result.failure(.badRequestError),
+        'NOT_FOUND' => Result.failure(.notFoundError),
+        'INVALID_CREDENTIALS' => Result.failure(.invalidCredentialsError),
+        _ => Result.failure(.internalServerError),
+      };
+    }
+
+    await _storage.write(key: _authToken, value: body['token']);
+    return Result.success(null);
+  }
 }
