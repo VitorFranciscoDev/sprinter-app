@@ -33,6 +33,10 @@ class AppLocalizationsEs extends AppLocalizations {
       'El nombre ingresado supera la longitud máxima permitida. Por favor, acórtalo e inténtalo de nuevo.';
 
   @override
+  String get biographyIsTooLongError =>
+      'La biografía ingresó supera la longitud máxima permitida. Por favor, acórtalo e inténtalo de nuevo.';
+  
+  @override
   String get invalidEmailError =>
       'La dirección de correo ingresada no es válida. Por favor, ingresa un correo con formato correcto (ej. usuario@ejemplo.com).';
 

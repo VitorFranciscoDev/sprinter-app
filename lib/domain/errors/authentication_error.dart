@@ -20,6 +20,9 @@ enum AuthenticationError {
   /// The provided name is too long
   nameIsTooLongError,
 
+  /// The provided biography is too long
+  biographyIsTooLongError,
+
   /// The email address provided is not in a valid format
   invalidEmailError,
 
@@ -36,6 +39,7 @@ enum AuthenticationError {
     .invalidCredentialsError => l10n.invalidCredentialsError,
     .nameIsTooShortError => l10n.nameIsTooShortError,
     .nameIsTooLongError => l10n.nameIsTooLongError,
+    .biographyIsTooLongError => l10n.biographyIsTooLongError,
     .invalidEmailError => l10n.invalidEmailError,
     .weakPasswordError => l10n.weakPasswordError,
     .userAlreadyExistsError => l10n.userAlreadyExistsError,

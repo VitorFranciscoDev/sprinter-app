@@ -5,6 +5,7 @@
   "invalidCredentialsError": "El correo electrónico o la contraseña que ingresaste son incorrectos. Verifícalos e inténtalo de nuevo.",
   "nameIsTooShortError": "El nombre ingresado es muy corto. Por favor, usa al menos el número mínimo de caracteres requeridos.",
   "nameIsTooLongError": "El nombre ingresado supera la longitud máxima permitida. Por favor, acórtalo e inténtalo de nuevo.",
+  "biographyIsTooLongError": "La biografía ingresada supera la longitud máxima permitida. Por favor, acórtala e inténtalo de nuevo.",
   "invalidEmailError": "La dirección de correo ingresada no es válida. Por favor, ingresa un correo con formato correcto (ej. usuario@ejemplo.com).",
   "weakPasswordError": "Tu contraseña es muy débil. Usa una combinación de letras mayúsculas, minúsculas, números y caracteres especiales.",
   "userAlreadyExistsError": "Ya existe una cuenta con este correo electrónico. Intenta iniciar sesión en su lugar o usa un correo diferente para registrarte."

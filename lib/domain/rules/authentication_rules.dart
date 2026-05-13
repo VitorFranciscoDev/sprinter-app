@@ -72,4 +72,42 @@ class AuthenticationRules {
 
     return Result.success(null);
   }
+
+  static Result<void, AuthenticationError> _validateUsername(String username) {
+    if (username.length < 3) {
+      return Result.failure(.nameIsTooShortError);
+    }
+
+    if (username.length > 32) {
+      return Result.failure(.nameIsTooLongError);
+    }
+
+    return Result.success(null);
+  }
+
+  static Result<void, AuthenticationError> _validateBiography(
+    String biography,
+  ) {
+    if (biography.length > 255) {
+      return Result.failure(.biographyIsTooLongError);
+    }
+
+    return Result.success(null);
+  }
+
+  static Result<void, AuthenticationError> validateCompleteRegister(
+    UserInformation information,
+  ) {
+    final usernameResult = _validateUsername(information.username);
+    if (usernameResult is Failure) {
+      return usernameResult;
+    }
+
+    final biographyResult = _validateBiography(information.biography);
+    if (biographyResult is Failure) {
+      return biographyResult;
+    }
+
+    return Result.success(null);
+  }
 }

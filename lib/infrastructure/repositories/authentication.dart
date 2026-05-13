@@ -16,4 +16,9 @@ abstract class AuthenticationRepository {
   Future<Result<void, AuthenticationError>> attemptRegister(
     UserCredentials credentials,
   );
+
+  /// Attempts to complete the register of the user with the given information
+  Future<Result<void, AuthenticationError>> attemptCompleteRegister(
+    UserInformation information,
+  );
 }
