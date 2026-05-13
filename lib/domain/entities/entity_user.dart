@@ -38,8 +38,9 @@ final class User {
       name: json['name'], 
       email: json['email'], 
       username: json['username'], 
-      biography: json['biography']);
-      imageURL: json['imageURL'], 
+      biography: json['biography'],
+      imageURL: json['imageURL']
+      );
   }
 }
 

@@ -37,7 +37,7 @@ class RegisterState with ChangeNotifier {
    final information = UserInformation(
     username: usernameController.text,
     biography: biographyController.text,
-    imageBytes: imageUrl);
+    imageBytes: bytes.toString());
 
     final response = await authenticationUseCase.completeRegister(information);
     if (response is Failure<void, AuthenticationError>) {
