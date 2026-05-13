@@ -25,10 +25,10 @@ class AuthenticationWS {
     );
   }
 
-  Future<http.Response> completeRegister(UserInformation informations) async{
+  Future<http.Response> completeRegister(UserInformation informations) async {
     return await StandardHttpRequest.standardPostRequest(
       endpoint: 'api/auth/completeRegistration',
-       json: informations.toJSON(),
-       );
+      json: informations.toJSON(),
+    );
   }
 }

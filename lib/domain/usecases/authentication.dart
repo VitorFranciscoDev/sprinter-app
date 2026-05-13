@@ -16,7 +16,7 @@ abstract class AuthenticationUseCase {
   );
 
   /// Attempts to complete the register of the user with the given information
-   Future<Result<void, AuthenticationError>> completeRegister(
-    UserInformation informations,
+  Future<Result<void, AuthenticationError>> completeRegister(
+    UserInformation information,
   );
 }

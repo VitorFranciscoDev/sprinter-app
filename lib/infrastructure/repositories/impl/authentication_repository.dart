@@ -112,17 +112,14 @@ class _AuthenticationRepository implements AuthenticationRepository {
         _ => Result.failure(.internalServerError),
       };
     }
-    
+
     final stored = await _storage.read(key: _currentUser);
     if (stored == null) {
       return Result.failure(.internalServerError);
     }
 
     final currentUser = User.fromJSON(jsonDecode(stored));
-    await _storage.write(
-      key: _currentUser,
-      value: jsonEncode(currentUser),
-    );
+    await _storage.write(key: _currentUser, value: jsonEncode(currentUser));
 
     return Result.success(null);
   }

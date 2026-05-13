@@ -6,7 +6,7 @@ import 'package:sprinter/domain/entities/entity_user.dart';
 import 'package:sprinter/domain/errors/authentication_error.dart';
 import 'package:sprinter/infrastructure/infrastructure.dart';
 
-class RegisterState with ChangeNotifier {
+class CompleteRegisterState with ChangeNotifier {
   /// Defines the loading state of Register Screen
   var loading = false;
 
@@ -14,12 +14,12 @@ class RegisterState with ChangeNotifier {
   AuthenticationError? error;
 
   /// Profile image bytes
-  final Uint8List bytes=  Uint8List(0);
+  final bytes = Uint8List(0);
 
   /// Username field controller
   final usernameController = TextEditingController();
 
-  /// biography field controller
+  /// Biography field controller
   final biographyController = TextEditingController();
 
   /// Username field node
@@ -34,10 +34,11 @@ class RegisterState with ChangeNotifier {
     error = null;
     notifyListeners();
 
-   final information = UserInformation(
-    username: usernameController.text,
-    biography: biographyController.text,
-    imageBytes: bytes.toString());
+    final information = UserInformation(
+      username: usernameController.text,
+      biography: biographyController.text,
+      imageBytes: bytes,
+    );
 
     final response = await authenticationUseCase.completeRegister(information);
     if (response is Failure<void, AuthenticationError>) {

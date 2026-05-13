@@ -43,17 +43,17 @@ class _AuthenticationUseCase implements AuthenticationUseCase {
 
   @override
   Future<Result<void, AuthenticationError>> completeRegister(
-    UserInformation informations,
+    UserInformation information,
   ) async {
-    final validInformations = AuthenticationRules.validateCompleteRegister(
-      informations,
+    final validInformation = AuthenticationRules.validateCompleteRegister(
+      information,
     );
-    if (validInformations is Failure) {
-      return validInformations;
+    if (validInformation is Failure) {
+      return validInformation;
     }
 
     return await _authenticationRepository.attemptCompleteRegister(
-      informations,
+      information,
     );
   }
 }

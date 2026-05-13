@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// Represents the application user
@@ -10,7 +11,7 @@ final class User {
     required this.email,
     required this.username,
     required this.biography,
-    required this.imageURL
+    required this.imageURL,
   });
 
   /// Unique identifier for the user
@@ -35,12 +36,12 @@ final class User {
   factory User.fromJSON(Map<String, dynamic> json) {
     return User(
       id: json['id'],
-      name: json['name'], 
-      email: json['email'], 
-      username: json['username'], 
+      name: json['name'],
+      email: json['email'],
+      username: json['username'],
       biography: json['biography'],
-      imageURL: json['imageURL']
-      );
+      imageURL: json['imageURL'],
+    );
   }
 }
 
@@ -71,12 +72,13 @@ final class UserCredentials {
 
 /// Represents the user information for the profile
 @immutable
-final class UserInformation{
+final class UserInformation {
   /// Standard constructor
   const UserInformation({
     required this.username,
-    required this.biography, 
-    required this.imageBytes});
+    required this.biography,
+    required this.imageBytes,
+  });
 
   /// Username of the user profile
   final String username;
@@ -85,14 +87,14 @@ final class UserInformation{
   final String biography;
 
   /// Profile picture of the user
-  final String imageBytes;
+  final Uint8List imageBytes;
 
   /// Returns JSON from [UserInformation]
-  Map<String,dynamic> toJSON() {
+  Map<String, dynamic> toJSON() {
     return {
-      'username':username,
-      'biography':biography,
-      'image_bytes':imageBytes
-      };
+      'username': username,
+      'biography': biography,
+      'image_bytes': imageBytes,
+    };
   }
 }
