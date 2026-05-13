@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
@@ -11,8 +13,8 @@ class RegisterState with ChangeNotifier {
   /// Defines if the request returned an error
   AuthenticationError? error;
 
-  /// Profile image url
-  final String imageUrl = "";
+  /// Profile image bytes
+  final Uint8List bytes=  Uint8List(0);
 
   /// Username field controller
   final usernameController = TextEditingController();
