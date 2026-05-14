@@ -13,6 +13,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  # App Dependencies
   cupertino_icons: ^1.0.9
   sentry_flutter: ^9.20.0
   crypto: ^3.0.7
@@ -22,11 +23,20 @@ dependencies:
   provider: ^6.1.5+1
   intl: any
   flutter_secure_storage: ^10.1.0
+  flutter_native_splash: ^2.4.7
+
+flutter_native_splash:
+  color: "#F5F5F5"
+  image: assets/logos/logo.png
+  android_12:
+    color: "#F5F5F5"
+    image: assets/logos/logo.png
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # Dev Dependencies
   flutter_lints: ^6.0.0
   flutter_launcher_icons: ^0.14.4
 
