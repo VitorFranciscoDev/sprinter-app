@@ -159,6 +159,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An account with this email address already exists. Try logging in instead, or use a different email to register.'**
   String get userAlreadyExistsError;
+
+  /// No description provided for @outOfStockError.
+  ///
+  /// In en, this message translates to:
+  /// **'This product is currently out of stock. Please check back later or choose a different product.'**
+  String get outOfStockError;
+
+  /// No description provided for @unauthorizedError.
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission to perform this action. Please log in with the correct account.'**
+  String get unauthorizedError;
 }
 
 class _AppLocalizationsDelegate

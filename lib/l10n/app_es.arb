@@ -8,5 +8,7 @@
   "biographyIsTooLongError": "La biografía ingresada supera la longitud máxima permitida. Por favor, acórtala e inténtalo de nuevo.",
   "invalidEmailError": "La dirección de correo ingresada no es válida. Por favor, ingresa un correo con formato correcto (ej. usuario@ejemplo.com).",
   "weakPasswordError": "Tu contraseña es muy débil. Usa una combinación de letras mayúsculas, minúsculas, números y caracteres especiales.",
-  "userAlreadyExistsError": "Ya existe una cuenta con este correo electrónico. Intenta iniciar sesión en su lugar o usa un correo diferente para registrarte."
+  "userAlreadyExistsError": "Ya existe una cuenta con este correo electrónico. Intenta iniciar sesión en su lugar o usa un correo diferente para registrarte.",
+  "outOfStockError": "Este producto actualmente está agotado. Por favor, revisa más tarde o elige un producto diferente.",
+  "unauthorizedError": "No tienes permiso para realizar esta acción. Por favor, inicia sesión con la cuenta correcta."
 }
