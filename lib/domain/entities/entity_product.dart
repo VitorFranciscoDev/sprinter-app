@@ -1,3 +1,4 @@
+/// Defines the Product entity and related classes for the application.
 final class Product {
   /// Standard constructor
   const Product({
@@ -7,8 +8,6 @@ final class Product {
     required this.imageURL,
     required this.price,
     required this.stock,
-    required this.createdAt,
-    required this.modifiedAt,
   });
 
   /// Unique identifier for the product
@@ -29,12 +28,6 @@ final class Product {
   /// Stock of the product
   final int stock;
 
-  /// Created at timestamp of the product
-  final DateTime createdAt;
-
-  /// Updated at timestamp of the product
-  final DateTime modifiedAt;
-
   /// Returns a Product from a given JSON
   factory Product.fromJSON(Map<String, dynamic> json) {
     return Product(
@@ -44,13 +37,13 @@ final class Product {
       imageURL: json['imageURL'],
       price: json['price'].toDouble(),
       stock: json['stock'],
-      createdAt: DateTime.parse(json['createdAt']),
-      modifiedAt: DateTime.parse(json['modifiedAt']),
     );
   }
 }
+
+// Standard filter class for product listing, including sorting, pagination, etc.
 class StandardFilter {
-    /// Standard filters for a listing, such as sorting, orderBy, limit and page
+    /// Standard constructor for a listing, such as sorting, orderBy, limit and page
     const StandardFilter({
         this.orderBy = 'createdAt',
         this.orderDirection = 'desc',

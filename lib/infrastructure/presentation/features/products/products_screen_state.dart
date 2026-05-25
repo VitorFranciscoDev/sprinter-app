@@ -36,7 +36,7 @@ class ProductsScreenState with ChangeNotifier {
     error = null;
     notifyListeners();
 
-    final response = await productUseCase.fetchProducts(_filter);
+    final response = await productUseCase.getPaginatedProducts(_filter);
 
     if (response is Success<List<Product>, ProductError>) {
       products = response.value;

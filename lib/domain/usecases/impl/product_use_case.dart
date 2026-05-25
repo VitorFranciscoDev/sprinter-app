@@ -15,14 +15,10 @@ class _ProductUseCase implements ProductUseCase {
   final ProductsRepository _productsRepository;
 
   @override
-  Future<Result<List<Product>, ProductError>> fetchProducts(
+  Future<Result<List<Product>, ProductError>> getPaginatedProducts(
     StandardFilter filter,
   ) async {
-    try {
       final products = await _productsRepository.fetchProducts(filter);
-      return Result.success(products);
-    } catch (e) {
-      return Result.failure(.internalServerError);
-    }
+      return Success(products);
   }
 }
