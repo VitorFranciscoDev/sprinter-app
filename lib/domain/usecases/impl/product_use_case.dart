@@ -5,20 +5,20 @@ import 'package:sprinter/domain/usecases/product.dart';
 
 import '../../../infrastructure/repositories/products.dart';
 
-ProductUseCase newProductUseCase(ProductsRepository productsRepository) {
+ProductUseCase newProductUseCase(ProductRepository productsRepository) {
   return _ProductUseCase(productsRepository);
 }
 
 class _ProductUseCase implements ProductUseCase {
-  const _ProductUseCase(this._productsRepository);
+  const _ProductUseCase(this._productRepository);
 
-  final ProductsRepository _productsRepository;
+  final ProductRepository _productRepository;
 
   @override
   Future<Result<List<Product>, ProductError>> getPaginatedProducts(
     StandardFilter filter,
   ) async {
-      final products = await _productsRepository.fetchProducts(filter);
+      final products = await _productRepository.getPaginatedProducts(filter);
       return Success(products);
   }
 }

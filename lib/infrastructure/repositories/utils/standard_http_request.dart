@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:sprinter/domain/entities/entity_product.dart';
 
 import '../../../build_flags.dart';
 
@@ -10,9 +11,14 @@ final class StandardHttpRequest {
   static Future<http.Response> standardGetRequest({
     required String endpoint,
     String? token,
+    StandardFilter? filter,
   }) async {
     final client = SentryHttpClient();
-    final url = Uri.parse('${BuildFlags.baseURL}/$endpoint');
+    Uri url = Uri.parse('${BuildFlags.baseURL}/$endpoint');
+
+    if (filter != null) {
+      url = url.replace(queryParameters: filter.toQueryParams());
+    }
 
     try {
       return client.get(

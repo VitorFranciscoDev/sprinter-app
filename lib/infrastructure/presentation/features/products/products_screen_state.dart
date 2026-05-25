@@ -18,32 +18,32 @@ class ProductsScreenState with ChangeNotifier {
   late StandardFilter _filter;
 
   ProductsScreenState() {
-    _filter = const StandardFilter();
+    _filter = StandardFilter.standard();
   }
 
   /// Gets the current filter
   StandardFilter get filter => _filter;
 
-  /// Updates the filter and fetches products
+  /// Updates the filter and get the products
   void updateFilter(StandardFilter newFilter) {
     _filter = newFilter;
-    fetchProducts();
+    getPaginatedProducts();
   }
 
-  /// Fetches products with the current filter
-  Future<void> fetchProducts() async {
+  /// Get products with the current filter
+  Future<void> getPaginatedProducts() async {
     loading = true;
     error = null;
     notifyListeners();
 
     final response = await productUseCase.getPaginatedProducts(_filter);
 
-    if (response is Success<List<Product>, ProductError>) {
-      products = response.value;
-    } else {
-      final failure = response as Failure<List<Product>, ProductError>;
-      error = failure.error;
+    if (response is Failure<List<Product>, ProductError>) {
+      error = response.error;
     }
+
+    final result = response as Success<List<Product>, ProductError>;
+    products = result.value;
 
     loading = false;
     notifyListeners();

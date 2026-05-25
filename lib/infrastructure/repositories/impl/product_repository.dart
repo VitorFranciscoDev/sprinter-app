@@ -5,18 +5,18 @@ import 'package:sprinter/domain/entities/entity_product.dart';
 import 'package:sprinter/infrastructure/repositories/products.dart';
 import 'package:sprinter/infrastructure/repositories/webservices/product_web_service.dart';
 
-ProductsRepository newProductsRepository(ProductWS productWS) {
-  return _ProductsRepository(productWS);
+ProductRepository newProductsRepository(ProductWS productWS) {
+  return _ProductRepository(productWS);
 }
 
-class _ProductsRepository implements ProductsRepository {
-  const _ProductsRepository(this._productWS);
+class _ProductRepository implements ProductRepository {
+  const _ProductRepository(this._productWS);
 
   final ProductWS _productWS;
 
   @override
-  Future<List<Product>> fetchProducts(StandardFilter filter) async {
-    final response = await _productWS.fetchProducts(filter);
+  Future<List<Product>> getPaginatedProducts(StandardFilter filter) async {
+    final response = await _productWS.getPaginatedProducts(filter);
     final body = jsonDecode(response.body);
 
     if (response.statusCode != 200) {
