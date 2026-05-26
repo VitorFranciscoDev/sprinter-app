@@ -3,10 +3,10 @@ import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/errors/product_error.dart';
 import 'package:sprinter/domain/usecases/product.dart';
 
-import '../../../infrastructure/repositories/products.dart';
+import '../../../infrastructure/repositories/product.dart';
 
-ProductUseCase newProductUseCase(ProductRepository productsRepository) {
-  return _ProductUseCase(productsRepository);
+ProductUseCase newProductUseCase(ProductRepository productRepository) {
+  return _ProductUseCase(productRepository);
 }
 
 class _ProductUseCase implements ProductUseCase {
@@ -15,10 +15,7 @@ class _ProductUseCase implements ProductUseCase {
   final ProductRepository _productRepository;
 
   @override
-  Future<Result<List<Product>, ProductError>> getPaginatedProducts(
-    StandardFilter filter,
-  ) async {
-      final products = await _productRepository.getPaginatedProducts(filter);
-      return Success(products);
+  Future<Result<List<Product>, ProductError>> getPaginatedProducts() async {
+      return await _productRepository.getPaginatedProducts();
   }
 }

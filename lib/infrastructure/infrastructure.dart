@@ -24,7 +24,7 @@ void initialize() {
     authenticationWS,
     storage,
   );
-  final productsRepository = newProductsRepository(productWS);
+  final productsRepository = newProductRepository(productWS);
 
   // Use cases
   authenticationUseCase = newAuthenticationUseCase(authenticationRepository);

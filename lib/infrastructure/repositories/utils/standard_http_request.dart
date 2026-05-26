@@ -11,14 +11,9 @@ final class StandardHttpRequest {
   static Future<http.Response> standardGetRequest({
     required String endpoint,
     String? token,
-    StandardFilter? filter,
   }) async {
     final client = SentryHttpClient();
-    Uri url = Uri.parse('${BuildFlags.baseURL}/$endpoint');
-
-    if (filter != null) {
-      url = url.replace(queryParameters: filter.toQueryParams());
-    }
+    final url = Uri.parse('${BuildFlags.baseURL}/$endpoint');
 
     try {
       return client.get(

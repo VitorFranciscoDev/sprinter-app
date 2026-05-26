@@ -4,7 +4,11 @@ import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/errors/product_error.dart';
 import 'package:sprinter/infrastructure/infrastructure.dart';
 
-class ProductsScreenState with ChangeNotifier {
+/// Represents the state for Products Screen
+class ProductsState with ChangeNotifier {
+  /// Standard constructor
+  ProductsState();
+
   /// Defines the loading state of Products Screen
   var loading = false;
 
@@ -14,36 +18,17 @@ class ProductsScreenState with ChangeNotifier {
   /// List of products
   List<Product> products = [];
 
-  /// Current filter for pagination and sorting
-  late StandardFilter _filter;
-
-  ProductsScreenState() {
-    _filter = StandardFilter.standard();
-  }
-
-  /// Gets the current filter
-  StandardFilter get filter => _filter;
-
-  /// Updates the filter and get the products
-  void updateFilter(StandardFilter newFilter) {
-    _filter = newFilter;
-    getPaginatedProducts();
-  }
-
   /// Get products with the current filter
   Future<void> getPaginatedProducts() async {
     loading = true;
     error = null;
     notifyListeners();
 
-    final response = await productUseCase.getPaginatedProducts(_filter);
-
+    final response = await productUseCase.getPaginatedProducts();
     if (response is Failure<List<Product>, ProductError>) {
       error = response.error;
     }
-
-    final result = response as Success<List<Product>, ProductError>;
-    products = result.value;
+    products = response as List<Product>;
 
     loading = false;
     notifyListeners();
