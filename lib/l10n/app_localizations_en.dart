@@ -34,7 +34,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get biographyIsTooLongError =>
-      'The biography you entered exceeds the maximum allowed length. Please shorten it and try again.';  
+      'The biography you entered exceeds the maximum allowed length. Please shorten it and try again.';
 
   @override
   String get invalidEmailError =>
@@ -47,4 +47,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get userAlreadyExistsError =>
       'An account with this email address already exists. Try logging in instead, or use a different email to register.';
+
+  @override
+  String get outOfStockError =>
+      'This product is currently out of stock. Please check back later or choose a different product.';
+
+  @override
+  String get unauthorizedError =>
+      'You do not have permission to perform this action. Please log in with the correct account.';
 }
