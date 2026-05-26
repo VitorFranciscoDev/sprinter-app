@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:sprinter/domain/entities/entity_product.dart';
 
 import '../../../build_flags.dart';
 
