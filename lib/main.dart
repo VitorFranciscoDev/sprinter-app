@@ -21,7 +21,6 @@ Future<void> main() async {
     options.anrEnabled = true;
     options.enableLogs = true;
   }, appRunner: () => runApp(const SprinterApp()));
-
 }
 
 class SprinterApp extends StatelessWidget {
@@ -38,6 +37,4 @@ class SprinterApp extends StatelessWidget {
       routerConfig: routes,
     );
   }
-
-
 }
