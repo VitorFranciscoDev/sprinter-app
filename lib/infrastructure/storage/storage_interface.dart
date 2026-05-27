@@ -7,8 +7,11 @@ abstract class AppStorage {
   Future<Map<String, dynamic>?> readJSON(String key);
 
   /// Writes an string in the storage
-  Future<void> writeString({String key, String value});
+  Future<void> writeString({required String key, required String value});
 
   /// Writes a JSON in the storage
-  Future<void> writeJSON<T>({String key, T value});
+  Future<void> writeJSON<T>({required String key, required T value});
+
+  /// Deletes a value from the storage
+  Future<void> deleteString(String key);
 }
