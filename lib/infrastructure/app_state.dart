@@ -58,7 +58,7 @@ class AppState with ChangeNotifier {
         );
       }
     } catch (e) {
-      print('Error initializing app state: $e');
+      debugPrint('Error initializing app state: $e');
     } finally {
       loading = false;
       notifyListeners();
