@@ -130,6 +130,7 @@ class _ForgotYourPassword extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _ExternalLoginButton extends StatelessWidget {
   const _ExternalLoginButton({
     required this.callback,
