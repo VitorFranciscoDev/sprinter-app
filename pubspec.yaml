@@ -26,10 +26,10 @@ dependencies:
   flutter_native_splash: ^2.4.7
 
 flutter_native_splash:
-  color: "#F5F5F5"
+  color: "#FFFFFF"
   image: assets/logos/logo.png
   android_12:
-    color: "#F5F5F5"
+    color: "#FFFFFF"
     image: assets/logos/logo.png
 
 dev_dependencies:

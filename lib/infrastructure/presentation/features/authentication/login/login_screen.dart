@@ -38,7 +38,7 @@ class _LoginScreenContentState extends State<_LoginScreenContent> {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: .symmetric(horizontal: 16),
+            padding: .symmetric(horizontal: 24),
             child: Column(
               crossAxisAlignment: .start,
               children: [
@@ -87,20 +87,6 @@ class _LoginScreenContentState extends State<_LoginScreenContent> {
                 const SizedBox(height: 16),
 
                 AuthenticationDivider(),
-
-                const SizedBox(height: 16),
-
-                _ExternalLoginButton(
-                  callback: _signInWithEmailAndPassword,
-                  platform: 'Google',
-                ),
-
-                const SizedBox(height: 8),
-
-                _ExternalLoginButton(
-                  callback: _signInWithEmailAndPassword,
-                  platform: 'Apple',
-                ),
 
                 const SizedBox(height: 16),
 
