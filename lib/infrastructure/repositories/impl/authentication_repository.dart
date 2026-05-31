@@ -7,7 +7,6 @@ import 'package:sprinter/domain/entities/entity_user.dart';
 import 'package:sprinter/infrastructure/infrastructure.dart';
 import 'package:sprinter/infrastructure/repositories/utils/standard_http_request.dart';
 import 'package:sprinter/infrastructure/storage/keys.dart';
-import 'package:sprinter/infrastructure/storage/storage.dart';
 
 import '../../../domain/entities/errors/authentication_error.dart';
 import '../authentication.dart';
@@ -50,9 +49,7 @@ class _AuthenticationRepository implements AuthenticationRepository {
 
   @override
   Future<Result<void, AuthenticationError>> getUserFromToken() async {
-    final response = await standardGetRequest(
-      endpoint: '/auth/me',
-    );
+    final response = await standardGetRequest(endpoint: '/auth/me');
     final body = jsonDecode(response.body);
 
     if (response.statusCode != 200) {

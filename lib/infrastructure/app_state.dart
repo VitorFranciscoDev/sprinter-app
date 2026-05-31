@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
 import 'package:sprinter/domain/enums/language.dart';
 import 'package:sprinter/infrastructure/infrastructure.dart';
-import 'package:sprinter/infrastructure/storage/impl/shared_preferences_storage.dart';
 import 'package:sprinter/infrastructure/storage/keys.dart';
 
 /// Represents the application state

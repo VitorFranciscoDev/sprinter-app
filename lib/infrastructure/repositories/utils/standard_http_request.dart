@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:sprinter/infrastructure/infrastructure.dart';
 import 'package:sprinter/infrastructure/storage/keys.dart';
-import 'package:sprinter/infrastructure/storage/storage.dart';
 
 import '../../../build_flags.dart';
 
