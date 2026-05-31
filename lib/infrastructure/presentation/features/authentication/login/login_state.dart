@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
-import 'package:sprinter/domain/errors/authentication_error.dart';
 import 'package:sprinter/infrastructure/infrastructure.dart';
+
+import '../../../../../domain/entities/errors/authentication_error.dart';
 
 class LoginState with ChangeNotifier {
   /// Defines the loading state of Login Screen
@@ -33,9 +34,7 @@ class LoginState with ChangeNotifier {
       password: passwordController.text.trim(),
     );
 
-    final response = await authenticationUseCase.attemptLogin(
-      credentials,
-    );
+    final response = await authenticationUseCase.attemptLogin(credentials);
     if (response is Failure<void, AuthenticationError>) {
       error = response.error;
     }

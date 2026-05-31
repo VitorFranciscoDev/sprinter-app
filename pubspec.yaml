@@ -24,6 +24,7 @@ dependencies:
   intl: any
   flutter_secure_storage: ^10.1.0
   flutter_native_splash: ^2.4.7
+  shared_preferences: ^2.5.5
 
 flutter_native_splash:
   color: "#FFFFFF"

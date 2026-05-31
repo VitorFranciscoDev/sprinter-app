@@ -129,39 +129,3 @@ class _ForgotYourPassword extends StatelessWidget {
     );
   }
 }
-
-class _ExternalLoginButton extends StatelessWidget {
-  const _ExternalLoginButton({
-    required this.callback,
-    required this.platform,
-  });
-
-  final VoidCallback callback;
-  final String platform;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: () => callback(),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: colorScheme.surface,
-          foregroundColor: colorScheme.onSurface,
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-            side: BorderSide(color: colorScheme.secondary.withValues(alpha: 0.5)),
-          ),
-          elevation: 0,
-        ),
-        child: Text(
-          platform,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-        ),
-      ),
-    );
-  }
-}

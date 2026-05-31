@@ -1,10 +1,10 @@
 import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
-import 'package:sprinter/domain/errors/authentication_error.dart';
-import 'package:sprinter/domain/rules/authentication_rules.dart';
 import 'package:sprinter/domain/usecases/authentication.dart';
 
 import '../../../infrastructure/repositories/authentication.dart';
+import '../../entities/errors/authentication_error.dart';
+import '../rules/authentication_rules.dart';
 
 AuthenticationUseCase newAuthenticationUseCase(
   AuthenticationRepository authenticationRepository,
@@ -52,8 +52,6 @@ class _AuthenticationUseCase implements AuthenticationUseCase {
       return validInformation;
     }
 
-    return await _authenticationRepository.attemptCompleteRegister(
-      information,
-    );
+    return await _authenticationRepository.attemptCompleteRegister(information);
   }
 }
