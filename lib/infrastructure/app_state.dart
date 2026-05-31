@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
 import 'package:sprinter/domain/enums/language.dart';
+import 'package:sprinter/infrastructure/infrastructure.dart';
 import 'package:sprinter/infrastructure/storage/impl/shared_preferences_storage.dart';
+import 'package:sprinter/infrastructure/storage/keys.dart';
 
 /// Represents the application state
 class AppState with ChangeNotifier {
   /// Standard constructor
-  AppState({SharedPreferencesStorage? storage})
-      : _storage = storage ?? SharedPreferencesStorage();
-
-  final SharedPreferencesStorage _storage;
-
-  /// Storage keys
-  static const _userKey = 'app_user';
-  static const _languageKey = 'app_language';
-  static const _themeKey = 'app_theme';
+  AppState();
 
   /// The user of the app
   User? user;
@@ -33,44 +27,43 @@ class AppState with ChangeNotifier {
     loading = true;
     notifyListeners();
 
-    try {
-      // Load user data
-      final userJSON = await _storage.readJSON(_userKey);
-      if (userJSON != null) {
-        user = User.fromJSON(userJSON);
-      }
-
-      // Load language preference
-      final languageString = await _storage.readString(_languageKey);
-      if (languageString != null) {
-        language = Language.values.firstWhere(
-          (lang) => lang.name == languageString,
-          orElse: () => Language.english,
-        );
-      }
-
-      // Load theme preference
-      final themeString = await _storage.readString(_themeKey);
-      if (themeString != null) {
-        theme = ThemeMode.values.firstWhere(
-          (t) => t.name == themeString,
-          orElse: () => ThemeMode.system,
-        );
-      }
-    } catch (e) {
-      debugPrint('Error initializing app state: $e');
-    } finally {
-      loading = false;
-      notifyListeners();
+    final userJSON = await secureStorage.readJSON(StorageKeys.userKey);
+    if (userJSON != null) {
+      user = User.fromJSON(userJSON);
     }
+
+    // Load language preference
+    final languageString = await sharedPreferencesStorage.readString(
+      StorageKeys.languageKey,
+    );
+    if (languageString != null) {
+      language = Language.values.firstWhere(
+        (lang) => lang.name == languageString,
+        orElse: () => Language.english,
+      );
+    }
+
+    // Load theme preference
+    final themeString = await sharedPreferencesStorage.readString(
+      StorageKeys.themeKey,
+    );
+    if (themeString != null) {
+      theme = ThemeMode.values.firstWhere(
+        (t) => t.name == themeString,
+        orElse: () => ThemeMode.system,
+      );
+    }
+
+    loading = false;
+    notifyListeners();
   }
 
   /// Saves the user data to storage
   Future<void> saveUser(User newUser) async {
     user = newUser;
-    await _storage.writeJSON<Map<String, dynamic>>(
-      key: _userKey,
-      value: _userToMap(newUser),
+    await secureStorage.writeJSON<Map<String, dynamic>>(
+      key: StorageKeys.userKey,
+      value: newUser.toJSON(),
     );
     notifyListeners();
   }
@@ -78,8 +71,8 @@ class AppState with ChangeNotifier {
   /// Saves the language preference to storage
   Future<void> saveLanguage(Language newLanguage) async {
     language = newLanguage;
-    await _storage.writeString(
-      key: _languageKey,
+    await sharedPreferencesStorage.writeString(
+      key: StorageKeys.languageKey,
       value: newLanguage.name,
     );
     notifyListeners();
@@ -88,8 +81,8 @@ class AppState with ChangeNotifier {
   /// Saves the theme preference to storage
   Future<void> saveTheme(ThemeMode newTheme) async {
     theme = newTheme;
-    await _storage.writeString(
-      key: _themeKey,
+    await sharedPreferencesStorage.writeString(
+      key: StorageKeys.themeKey,
       value: newTheme.name,
     );
     notifyListeners();
@@ -98,19 +91,7 @@ class AppState with ChangeNotifier {
   /// Clears user data from storage and state
   Future<void> logout() async {
     user = null;
-    await _storage.deleteString(_userKey);
+    await secureStorage.deleteString(StorageKeys.currentUser);
     notifyListeners();
-  }
-
-  /// Converts User to Map for JSON serialization
-  Map<String, dynamic> _userToMap(User user) {
-    return {
-      'id': user.id,
-      'name': user.name,
-      'email': user.email,
-      'username': user.username,
-      'biography': user.biography,
-      'imageURL': user.imageURL,
-    };
   }
 }

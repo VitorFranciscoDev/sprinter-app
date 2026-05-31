@@ -1,9 +1,9 @@
 import 'package:sprinter/domain/entities/entity_product.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
-import 'package:sprinter/domain/errors/product_error.dart';
 import 'package:sprinter/domain/usecases/product.dart';
 
 import '../../../infrastructure/repositories/product.dart';
+import '../../entities/errors/product_error.dart';
 
 ProductUseCase newProductUseCase(ProductRepository productRepository) {
   return _ProductUseCase(productRepository);

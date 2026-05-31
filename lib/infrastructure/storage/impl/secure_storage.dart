@@ -1,8 +1,12 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
-import '../storage_interface.dart';
+import '../storage.dart';
 
-class SecureStorage implements AppStorage {
+AppStorage newSecureStorage() {
+  return _SecureStorage();
+}
+
+class _SecureStorage implements AppStorage {
   final _storage = const FlutterSecureStorage();
 
   @override
@@ -11,15 +15,18 @@ class SecureStorage implements AppStorage {
   }
 
   @override
-  Future<Map<String, dynamic>?> readJSON(String key) async {
-    final value = await _storage.read(key: key);
-    if (value == null) return null;
-    return jsonDecode(value) as Map<String, dynamic>;
+  Future<void> writeString({required String key, required String value}) async {
+    await _storage.write(key: key, value: value);
   }
 
   @override
-  Future<void> writeString({required String key, required String value}) async {
-    await _storage.write(key: key, value: value);
+  Future<Map<String, dynamic>?> readJSON(String key) async {
+    final value = await _storage.read(key: key);
+    if (value == null) {
+      return null;
+    }
+
+    return jsonDecode(value);
   }
 
   @override

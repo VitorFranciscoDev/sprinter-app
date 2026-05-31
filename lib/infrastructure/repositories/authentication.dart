@@ -1,6 +1,6 @@
 import '../../../domain/entities/entity_result.dart';
 import '../../../domain/entities/entity_user.dart';
-import '../../domain/errors/authentication_error.dart';
+import '../../domain/entities/errors/authentication_error.dart';
 
 /// Defines the contract for authentication data operations
 abstract class AuthenticationRepository {
@@ -10,7 +10,7 @@ abstract class AuthenticationRepository {
   );
 
   /// Get user information from the given token
-  Future<Result<void, AuthenticationError>> getUserFromToken(String token);
+  Future<Result<void, AuthenticationError>> getUserFromToken();
 
   /// Attempts to register the user with the given credentials
   Future<Result<void, AuthenticationError>> attemptRegister(

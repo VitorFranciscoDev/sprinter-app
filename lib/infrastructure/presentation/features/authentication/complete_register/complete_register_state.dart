@@ -3,8 +3,9 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
-import 'package:sprinter/domain/errors/authentication_error.dart';
 import 'package:sprinter/infrastructure/infrastructure.dart';
+
+import '../../../../../domain/entities/errors/authentication_error.dart';
 
 class CompleteRegisterState with ChangeNotifier {
   /// Defines the loading state of Register Screen

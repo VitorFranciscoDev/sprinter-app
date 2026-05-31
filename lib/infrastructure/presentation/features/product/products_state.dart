@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sprinter/domain/entities/entity_product.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
-import 'package:sprinter/domain/errors/product_error.dart';
 import 'package:sprinter/infrastructure/infrastructure.dart';
+
+import '../../../../domain/entities/errors/product_error.dart';
 
 /// Represents the state for Products Screen
 class ProductsState with ChangeNotifier {

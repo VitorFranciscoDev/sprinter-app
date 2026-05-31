@@ -1,25 +1,26 @@
 import 'dart:convert';
 
-import 'package:sprinter/domain/entities/entity_error.dart';
+import 'package:sprinter/domain/entities/errors/entity_error.dart';
 import 'package:sprinter/domain/entities/entity_product.dart';
 import 'package:sprinter/infrastructure/repositories/product.dart';
-import 'package:sprinter/infrastructure/repositories/webservices/product_web_service.dart';
+import 'package:sprinter/infrastructure/repositories/utils/standard_http_request.dart';
+import 'package:sprinter/infrastructure/storage/storage.dart';
 
 import '../../../domain/entities/entity_result.dart';
-import '../../../domain/errors/product_error.dart';
+import '../../../domain/entities/errors/product_error.dart';
 
-ProductRepository newProductRepository(ProductWS productWS) {
-  return _ProductRepository(productWS);
+ProductRepository newProductRepository() {
+  return _ProductRepository();
 }
 
 class _ProductRepository implements ProductRepository {
-  const _ProductRepository(this._productWS);
-
-  final ProductWS _productWS;
+  const _ProductRepository();
 
   @override
   Future<Result<List<Product>, ProductError>> getPaginatedProducts() async {
-    final response = await _productWS.getPaginatedProducts();
+    final response = await standardGetRequest(
+      endpoint: '/product/list',
+    );
     final body = jsonDecode(response.body);
 
     if (response.statusCode != 200) {

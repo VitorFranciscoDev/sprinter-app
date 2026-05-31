@@ -42,6 +42,17 @@ final class User {
       imageURL: json['imageURL'],
     );
   }
+
+  Map<String, dynamic> toJSON() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'username': username,
+      'biography': biography,
+      'imageURL': imageURL,
+    };
+  }
 }
 
 /// Represents the user credentials for authentication actions
