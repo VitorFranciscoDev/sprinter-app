@@ -1,10 +1,10 @@
 import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
 import 'package:sprinter/domain/usecases/authentication.dart';
+import 'package:sprinter/domain/usecases/impl/rules/authentication_rules.dart';
 
 import '../../../infrastructure/repositories/authentication.dart';
 import '../../entities/errors/authentication_error.dart';
-import '../rules/authentication_rules.dart';
 
 AuthenticationUseCase newAuthenticationUseCase(
   AuthenticationRepository authenticationRepository,

@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:sprinter/build_flags.dart';
-import 'package:sprinter/domain/entities/errors/entity_error.dart';
+import 'package:sprinter/domain/entities/entity_error.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
 import 'package:sprinter/infrastructure/storage/keys.dart';

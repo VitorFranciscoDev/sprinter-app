@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:sprinter/build_flags.dart';
-import 'package:sprinter/domain/entities/errors/entity_error.dart';
+import 'package:sprinter/domain/entities/entity_error.dart';
 import 'package:sprinter/domain/entities/entity_product.dart';
 import 'package:sprinter/infrastructure/repositories/product.dart';
 import 'package:sprinter/infrastructure/storage/keys.dart';
@@ -22,9 +22,13 @@ class _ProductRepository implements ProductRepository {
   final AppStorage _storage;
 
   @override
-  Future<Result<List<Product>, ProductError>> listPaginatedProducts() async {
+  Future<Result<List<Product>, ProductError>> listPaginatedProducts(
+    int cursor,
+  ) async {
+    final params = {"cursor": cursor.toString()};
+
     try {
-      final url = Uri.parse('${BuildFlags.baseURL}/product/list');
+      final url = Uri.https(BuildFlags.baseURL, '/api/product/list', params);
       final token = _storage.readString(StorageKeys.authToken);
 
       final response = await http.get(

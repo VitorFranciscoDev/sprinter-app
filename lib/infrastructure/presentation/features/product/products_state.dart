@@ -25,7 +25,7 @@ class ProductsState with ChangeNotifier {
     error = null;
     notifyListeners();
 
-    final response = await productUseCase.getPaginatedProducts();
+    final response = await productUseCase.getPaginatedProducts(products.length);
     if (response is Failure<List<Product>, ProductError>) {
       error = response.error;
     }

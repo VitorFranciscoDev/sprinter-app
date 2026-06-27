@@ -79,32 +79,3 @@ final class UserCredentials {
     return {'name': name, 'email': email, 'password': password};
   }
 }
-
-/// Represents the user information for the profile
-@immutable
-final class UserInformation {
-  /// Standard constructor
-  const UserInformation({
-    required this.username,
-    required this.biography,
-    required this.imageBytes,
-  });
-
-  /// Username of the user profile
-  final String username;
-
-  /// Biography of the user profile
-  final String biography;
-
-  /// Profile picture of the user
-  final Uint8List imageBytes;
-
-  /// Returns JSON from [UserInformation]
-  Map<String, dynamic> toJSON() {
-    return {
-      'username': username,
-      'biography': biography,
-      'image_bytes': imageBytes,
-    };
-  }
-}

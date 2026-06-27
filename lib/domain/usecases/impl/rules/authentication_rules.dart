@@ -2,7 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:sprinter/domain/entities/entity_result.dart';
 import 'package:sprinter/domain/entities/entity_user.dart';
 
-import '../../entities/errors/authentication_error.dart';
+import '../../../entities/errors/authentication_error.dart';
 
 class AuthenticationRules {
   static Result<void, AuthenticationError> _validateName(String name) {
@@ -69,44 +69,6 @@ class AuthenticationRules {
     final passwordResult = _validatePassword(credentials.password);
     if (passwordResult is Failure) {
       return passwordResult;
-    }
-
-    return Result.success(null);
-  }
-
-  static Result<void, AuthenticationError> _validateUsername(String username) {
-    if (username.length < 3) {
-      return Result.failure(.nameIsTooShortError);
-    }
-
-    if (username.length > 32) {
-      return Result.failure(.nameIsTooLongError);
-    }
-
-    return Result.success(null);
-  }
-
-  static Result<void, AuthenticationError> _validateBiography(
-    String biography,
-  ) {
-    if (biography.length > 255) {
-      return Result.failure(.biographyIsTooLongError);
-    }
-
-    return Result.success(null);
-  }
-
-  static Result<void, AuthenticationError> validateCompleteRegister(
-    UserInformation information,
-  ) {
-    final usernameResult = _validateUsername(information.username);
-    if (usernameResult is Failure) {
-      return usernameResult;
-    }
-
-    final biographyResult = _validateBiography(information.biography);
-    if (biographyResult is Failure) {
-      return biographyResult;
     }
 
     return Result.success(null);

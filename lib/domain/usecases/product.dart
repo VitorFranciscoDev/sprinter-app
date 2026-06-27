@@ -6,5 +6,5 @@ import '../entities/errors/product_error.dart';
 /// Defines the contract for product-related business logic
 abstract class ProductUseCase {
   /// Get a list of products with optional filtering and pagination
-  Future<Result<List<Product>, ProductError>> getPaginatedProducts();
+  Future<Result<List<Product>, ProductError>> getPaginatedProducts(int cursor);
 }
