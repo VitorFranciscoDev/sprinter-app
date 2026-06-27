@@ -10,32 +10,32 @@ import 'package:flutter/material.dart';
 /// Use [Result.success] to create a successful result with a value of type [T].
 /// Use [Result.failure] to create an error result with a value of type [E].
 sealed class Result<T, E> {
-  /// Standard constructor
+  /// Standard constructor.
   const Result();
 
-  /// Creates an instance of Result containing a value
+  /// Creates an instance of Result containing a value.
   factory Result.success(T value) => Success(value);
 
-  /// Create an instance of Result containing an error
+  /// Create an instance of Result containing an error.
   factory Result.failure(E error) => Failure(error);
 }
 
-/// Subclass of Result for values
+/// Subclass of Result for values.
 @immutable
 final class Success<T, E> extends Result<T, E> {
-  /// Standard constructor
+  /// Standard constructor.
   const Success(this.value);
 
-  /// Returned value in result
+  /// Returned value in result.
   final T value;
 }
 
-/// Subclass of Result for errors
+/// Subclass of Result for errors.
 @immutable
 final class Failure<T, E> extends Result<T, E> {
-  /// Standard constructor
+  /// Standard constructor.
   const Failure(this.error);
 
-  /// Returned error in result
+  /// Returned error in result.
   final E error;
 }

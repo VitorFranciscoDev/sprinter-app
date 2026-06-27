@@ -40,18 +40,4 @@ class _AuthenticationUseCase implements AuthenticationUseCase {
 
     return await _authenticationRepository.attemptRegister(credentials);
   }
-
-  @override
-  Future<Result<void, AuthenticationError>> completeRegister(
-    UserInformation information,
-  ) async {
-    final validInformation = AuthenticationRules.validateCompleteRegister(
-      information,
-    );
-    if (validInformation is Failure) {
-      return validInformation;
-    }
-
-    return await _authenticationRepository.attemptCompleteRegister(information);
-  }
 }

@@ -16,6 +16,6 @@ class _ProductUseCase implements ProductUseCase {
 
   @override
   Future<Result<List<Product>, ProductError>> getPaginatedProducts() async {
-      return await _productRepository.getPaginatedProducts();
+      return await _productRepository.listPaginatedProducts();
   }
 }

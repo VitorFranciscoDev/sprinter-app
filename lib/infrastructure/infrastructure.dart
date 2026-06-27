@@ -6,22 +6,17 @@ import 'package:sprinter/infrastructure/repositories/impl/authentication_reposit
 import 'package:sprinter/infrastructure/repositories/impl/product_repository.dart';
 import 'package:sprinter/infrastructure/storage/impl/secure_storage.dart';
 import 'package:sprinter/infrastructure/storage/impl/shared_preferences_storage.dart';
-import 'package:sprinter/infrastructure/storage/storage.dart';
-
-late final AppStorage secureStorage;
-late final AppStorage sharedPreferencesStorage;
 
 late final AuthenticationUseCase authenticationUseCase;
 late final ProductUseCase productUseCase;
 
 void initialize() {
   // App storage
-  secureStorage = newSecureStorage();
-  sharedPreferencesStorage = newSharedPreferencesStorage();
+  final secureStorage = newSecureStorage();
 
   // Repositories
-  final authenticationRepository = newAuthenticationRepository();
-  final productsRepository = newProductRepository();
+  final authenticationRepository = newAuthenticationRepository(secureStorage);
+  final productsRepository = newProductRepository(secureStorage);
 
   // Use cases
   authenticationUseCase = newAuthenticationUseCase(authenticationRepository);

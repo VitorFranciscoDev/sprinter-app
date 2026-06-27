@@ -1,35 +1,59 @@
 import 'dart:convert';
 
+import 'package:http/http.dart' as http;
+import 'package:sprinter/build_flags.dart';
 import 'package:sprinter/domain/entities/errors/entity_error.dart';
 import 'package:sprinter/domain/entities/entity_product.dart';
 import 'package:sprinter/infrastructure/repositories/product.dart';
-import 'package:sprinter/infrastructure/repositories/utils/standard_http_request.dart';
+import 'package:sprinter/infrastructure/storage/keys.dart';
+import 'package:sprinter/infrastructure/storage/storage.dart';
 
 import '../../../domain/entities/entity_result.dart';
 import '../../../domain/entities/errors/product_error.dart';
+import '../../../logger.dart';
 
-ProductRepository newProductRepository() {
-  return _ProductRepository();
+ProductRepository newProductRepository(AppStorage storage) {
+  return _ProductRepository(storage);
 }
 
 class _ProductRepository implements ProductRepository {
-  const _ProductRepository();
+  const _ProductRepository(this._storage);
+
+  final AppStorage _storage;
 
   @override
-  Future<Result<List<Product>, ProductError>> getPaginatedProducts() async {
-    final response = await standardGetRequest(endpoint: '/product/list');
-    final body = jsonDecode(response.body);
+  Future<Result<List<Product>, ProductError>> listPaginatedProducts() async {
+    try {
+      final url = Uri.parse('${BuildFlags.baseURL}/product/list');
+      final token = _storage.readString(StorageKeys.authToken);
 
-    if (response.statusCode != 200) {
-      final errorResponse = ErrorResponse.fromJSON(body);
+      final response = await http.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      final body = jsonDecode(response.body);
 
-      return switch (errorResponse.code) {
-        'INTERNAL_SERVER_ERROR' => Result.failure(.internalServerError),
-        'BAD_REQUEST' => Result.failure(.badRequestError),
-        _ => Result.failure(.internalServerError),
-      };
+      if (response.statusCode != 200) {
+        final errorResponse = ErrorResponse.fromJSON(body);
+
+        return switch (errorResponse.code) {
+          'INTERNAL_SERVER_ERROR' => Result.failure(.internalServerError),
+          'BAD_REQUEST' => Result.failure(.badRequestError),
+          _ => Result.failure(.internalServerError),
+        };
+      }
+
+      return body.map((product) => Product.fromJSON(product)).toList();
+    } catch (e, stackTrace) {
+      logger.e(
+        "failed to list paginated products",
+        error: e,
+        stackTrace: stackTrace,
+      );
+      return .failure(.internalServerError);
     }
-
-    return body.map((product) => Product.fromJSON(product)).toList();
   }
 }
