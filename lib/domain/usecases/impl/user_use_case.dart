@@ -4,17 +4,17 @@ import 'package:sprinter/domain/entities/errors/user_error.dart';
 import 'package:sprinter/domain/usecases/user.dart';
 import 'package:sprinter/infrastructure/repositories/user.dart';
 
-UserUseCase newUserUseCase(UserRepository repository) {
-  return _UserUseCase(repository: repository);
+UserUseCase newUserUseCase(UserRepository userRepository) {
+  return _UserUseCase(userRepository: userRepository);
 }
 
 class _UserUseCase implements UserUseCase {
-  _UserUseCase({required this._repository});
+  const _UserUseCase({required this._userRepository});
   
-  final UserRepository _repository;
+  final UserRepository _userRepository;
 
   @override
   Future<Result<User, UserError>> getUserInformation() async {
-    return await _repository.getUserInformation();
+    return await _userRepository.getUserInformation();
   }
 }

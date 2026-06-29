@@ -6,20 +6,19 @@ import 'package:sprinter/infrastructure/storage/keys.dart';
 import 'package:sprinter/infrastructure/storage/storage.dart';
 
 UserRepository newUserRepository(AppStorage storage) {
-    return _UserRepostiory(storage: storage);
+    return _UserRepository(storage: storage);
 }
 
-class _UserRepostiory implements UserRepository {
-  _UserRepostiory({required this._storage});
+class _UserRepository implements UserRepository {
+  const _UserRepository({required this._storage});
 
   final AppStorage _storage;
   @override
   Future<Result<User, UserError>> getUserInformation() async {
-    Map<String, dynamic>? data = await _storage.readJSON(StorageKeys.userKey);
-    if (data == null) {
-      return Result.failure(UserError.notFoundError);
+    final user= await _storage.readJSON(StorageKeys.userKey);
+    if (user == null) {
+      return .failure(UserError.notFoundError);
     }
-    User user = User.fromJSON(data);
-    return Result.success(user);
+    return .success(User.fromJSON(user));
   }
 }

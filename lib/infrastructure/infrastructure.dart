@@ -6,7 +6,7 @@ import 'package:sprinter/domain/usecases/impl/product_use_case.dart';
 import 'package:sprinter/domain/usecases/user.dart';
 import 'package:sprinter/infrastructure/repositories/impl/authentication_repository.dart';
 import 'package:sprinter/infrastructure/repositories/impl/product_repository.dart';
-import 'package:sprinter/infrastructure/repositories/impl/user_repositroy.dart';
+import 'package:sprinter/infrastructure/repositories/impl/user_repository.dart';
 import 'package:sprinter/infrastructure/storage/impl/secure_storage.dart';
 
 late final AuthenticationUseCase authenticationUseCase;
