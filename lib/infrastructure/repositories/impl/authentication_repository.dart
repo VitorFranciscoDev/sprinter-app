@@ -32,7 +32,7 @@ class _AuthenticationRepository implements AuthenticationRepository {
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(json),
+        body: jsonEncode(credentials.toJSON()),
       );
       final body = jsonDecode(response.body);
 
@@ -108,7 +108,7 @@ class _AuthenticationRepository implements AuthenticationRepository {
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(json),
+        body: jsonEncode(credentials.toJSON()),
       );
       final body = jsonDecode(response.body);
 

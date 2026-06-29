@@ -69,6 +69,7 @@ class _RegisterScreenContentState extends State<_RegisterScreenContent> {
                     const SizedBox(height: 24),
 
                     DefaultTextField(
+                      controller: state.nameController,
                       label: l10n.name,
                       icon: Icons.person_outlined,
                     ),
@@ -76,6 +77,7 @@ class _RegisterScreenContentState extends State<_RegisterScreenContent> {
                     const SizedBox(height: 8),
 
                     DefaultTextField(
+                      controller: state.emailController,
                       label: l10n.email,
                       icon: Icons.email_outlined,
                     ),
@@ -83,6 +85,7 @@ class _RegisterScreenContentState extends State<_RegisterScreenContent> {
                     const SizedBox(height: 8),
 
                     DefaultTextField(
+                      controller: state.passwordController,
                       label: l10n.password,
                       icon: Icons.lock_outlined,
                       isPassword: true,

@@ -5,22 +5,24 @@ import 'package:sprinter/infrastructure/infrastructure.dart';
 
 import '../../../../../domain/entities/errors/authentication_error.dart';
 
+/// Represents the state for the login screen.
 class LoginState with ChangeNotifier {
-  /// Defines the loading state of Login Screen
+  /// Defines the loading state of Login Screen.
   var loading = false;
 
-  /// Email field controller
+  /// Email field controller.
   final emailController = TextEditingController();
 
-  /// Password field controller
+  /// Password field controller.
   final passwordController = TextEditingController();
 
-  /// Email field node
+  /// Email field node.
   final emailNode = FocusNode();
 
-  /// Password field node
+  /// Password field node.
   final passwordNode = FocusNode();
 
+  /// Attempts to log in the application with the given credentials.
   Future<Result<void, AuthenticationError>> attemptLogin() async {
     loading = true;
     notifyListeners();

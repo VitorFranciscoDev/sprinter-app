@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class DefaultTextField extends StatefulWidget {
   const DefaultTextField({
     super.key,
+    required this.controller,
     required this.label,
     required this.icon,
     this.isPassword = false,
   });
 
+  final TextEditingController controller;
   final String label;
   final IconData icon;
   final bool isPassword;
@@ -24,6 +26,7 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return TextFormField(
+      controller: widget.controller,
       obscureText: widget.isPassword && _obscureText,
       decoration: InputDecoration(
         labelText: widget.label,

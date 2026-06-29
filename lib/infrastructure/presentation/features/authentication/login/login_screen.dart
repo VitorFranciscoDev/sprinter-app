@@ -70,6 +70,7 @@ class _LoginScreenContentState extends State<_LoginScreenContent> {
                     const SizedBox(height: 24),
 
                     DefaultTextField(
+                      controller: state.emailController,
                       label: l10n.email,
                       icon: Icons.email_outlined,
                     ),
@@ -77,6 +78,7 @@ class _LoginScreenContentState extends State<_LoginScreenContent> {
                     const SizedBox(height: 8),
 
                     DefaultTextField(
+                      controller: state.passwordController,
                       label: l10n.password,
                       icon: Icons.lock_outlined,
                       isPassword: true,
