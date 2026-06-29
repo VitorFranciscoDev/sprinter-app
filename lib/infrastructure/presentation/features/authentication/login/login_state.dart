@@ -9,9 +9,6 @@ class LoginState with ChangeNotifier {
   /// Defines the loading state of Login Screen
   var loading = false;
 
-  /// Defines if the request returned an error
-  AuthenticationError? error;
-
   /// Email field controller
   final emailController = TextEditingController();
 
@@ -24,9 +21,8 @@ class LoginState with ChangeNotifier {
   /// Password field node
   final passwordNode = FocusNode();
 
-  Future<void> attemptLogin() async {
+  Future<Result<void, AuthenticationError>> attemptLogin() async {
     loading = true;
-    error = null;
     notifyListeners();
 
     final credentials = UserCredentials(
@@ -34,12 +30,11 @@ class LoginState with ChangeNotifier {
       password: passwordController.text.trim(),
     );
 
-    final response = await authenticationUseCase.attemptLogin(credentials);
-    if (response is Failure<void, AuthenticationError>) {
-      error = response.error;
+    try {
+      return await authenticationUseCase.attemptLogin(credentials);
+    } finally {
+      loading = false;
+      notifyListeners();
     }
-
-    loading = false;
-    notifyListeners();
   }
 }

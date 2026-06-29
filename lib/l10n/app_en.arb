@@ -10,5 +10,16 @@
   "weakPasswordError": "Your password is too weak. Use a mix of uppercase letters, lowercase letters, numbers, and special characters.",
   "userAlreadyExistsError": "An account with this email address already exists. Try logging in instead, or use a different email to register.",
   "outOfStockError": "This product is currently out of stock. Please check back later or choose a different product.",
-  "unauthorizedError": "You do not have permission to perform this action. Please log in with the correct account."
+  "unauthorizedError": "You do not have permission to perform this action. Please log in with the correct account.",
+  "loginSubtitle": "Log in the app to start to do activities",
+  "email": "Email",
+  "password": "Password",
+  "name": "Name",
+  "loginAction": "Log In",
+  "forgotYourPassword": "Forgot your password?",
+  "or": "or",
+  "noAccountQuestion": "Don't have an account?",
+  "hasAccountQuestion": "Already have an account?",
+  "signUp": "Sign up",
+  "signIn": "Sign in"
 }

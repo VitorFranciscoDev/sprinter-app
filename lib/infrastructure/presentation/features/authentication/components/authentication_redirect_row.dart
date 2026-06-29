@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sprinter/l10n/app_localizations.dart';
 
 class AuthenticationRedirectRow extends StatelessWidget {
   const AuthenticationRedirectRow({
@@ -13,12 +14,13 @@ class AuthenticationRedirectRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          redirectToRegister ? 'Don\'t have an account?' : 'Already have an account?',
+          redirectToRegister ? l10n!.noAccountQuestion : l10n!.hasAccountQuestion,
           style: TextStyle(
             fontSize: 14,
             color: colorScheme.onSurface.withValues(alpha: 0.6),
@@ -33,7 +35,7 @@ class AuthenticationRedirectRow extends StatelessWidget {
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
           child: Text(
-            redirectToRegister ? 'Sign up' : 'Sign in',
+            redirectToRegister ? l10n.signUp : l10n.signIn,
             style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ),

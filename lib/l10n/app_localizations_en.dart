@@ -55,4 +55,37 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get unauthorizedError =>
       'You do not have permission to perform this action. Please log in with the correct account.';
+
+  @override
+  String get loginSubtitle => 'Log in the app to start to do activities';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get loginAction => 'Log In';
+
+  @override
+  String get forgotYourPassword => 'Forgot your password?';
+
+  @override
+  String get or => 'or';
+
+  @override
+  String get noAccountQuestion => 'Don\'t have an account?';
+
+  @override
+  String get hasAccountQuestion => 'Already have an account?';
+
+  @override
+  String get signUp => 'Sign up';
+
+  @override
+  String get signIn => 'Sign in';
 }

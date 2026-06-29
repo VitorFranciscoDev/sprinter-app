@@ -55,4 +55,38 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get unauthorizedError =>
       'No tienes permiso para realizar esta acción. Por favor, inicia sesión con la cuenta correcta.';
+
+  @override
+  String get loginSubtitle =>
+      'Inicia sesión en la aplicación para comenzar a realizar actividades.';
+
+  @override
+  String get email => 'Correo electrónico';
+
+  @override
+  String get password => 'Contraseña';
+
+  @override
+  String get name => 'Nombre';
+
+  @override
+  String get loginAction => 'Acceso';
+
+  @override
+  String get forgotYourPassword => '¿Olvidaste tu contraseña?';
+
+  @override
+  String get or => 'o';
+
+  @override
+  String get noAccountQuestion => '¿No tienes cuenta?';
+
+  @override
+  String get hasAccountQuestion => '¿Ya tienes cuenta?';
+
+  @override
+  String get signUp => 'Registrarse';
+
+  @override
+  String get signIn => 'Iniciar sesión';
 }

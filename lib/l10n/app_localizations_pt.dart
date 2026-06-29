@@ -55,4 +55,38 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get unauthorizedError =>
       'Você não tem permissão para realizar esta ação. Faça login com a conta correta.';
+
+  @override
+  String get loginSubtitle =>
+      'Faça login no aplicativo para começar a realizar atividades.';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Senha';
+
+  @override
+  String get name => 'Nome';
+
+  @override
+  String get loginAction => 'Entrar';
+
+  @override
+  String get forgotYourPassword => 'Esqueceu sua senha?';
+
+  @override
+  String get or => 'ou';
+
+  @override
+  String get noAccountQuestion => 'Não tem uma conta?';
+
+  @override
+  String get hasAccountQuestion => 'Já tem uma conta?';
+
+  @override
+  String get signUp => 'Cadastre-se';
+
+  @override
+  String get signIn => 'Entrar';
 }

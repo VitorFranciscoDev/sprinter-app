@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 import 'package:sprinter/infrastructure/app_state.dart';
+import 'package:sprinter/infrastructure/infrastructure.dart';
 import 'package:sprinter/infrastructure/presentation/routes.dart';
 import 'package:sprinter/infrastructure/presentation/theme.dart';
+
+import 'l10n/app_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Add native splash screen
   FlutterNativeSplash.preserve(widgetsBinding: WidgetsBinding.instance);
+
+  // Initialize use cases
+  initialize();
 
   // Initialize app state
   final appState = AppState();
@@ -18,7 +25,12 @@ Future<void> main() async {
   // Remove native splash screen
   FlutterNativeSplash.remove();
 
-  runApp(const SprinterApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => AppState(),
+      child: const SprinterApp(),
+    ),
+  );
 }
 
 class SprinterApp extends StatelessWidget {
@@ -35,6 +47,13 @@ class SprinterApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       routerConfig: routes,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

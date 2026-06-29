@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:sprinter/domain/entities/entity_result.dart';
+import 'package:sprinter/domain/entities/errors/authentication_error.dart';
 import 'package:sprinter/infrastructure/presentation/features/authentication/components/authentication_divider.dart';
 import 'package:sprinter/infrastructure/presentation/features/authentication/components/authentication_redirect_row.dart';
+import 'package:sprinter/infrastructure/presentation/routes.dart';
 import 'package:sprinter/infrastructure/presentation/shared/components/default_button.dart';
+import 'package:sprinter/infrastructure/presentation/shared/components/default_error_modal.dart';
 import 'package:sprinter/infrastructure/presentation/shared/components/default_text_field.dart';
+import 'package:sprinter/l10n/app_localizations.dart';
 
 import 'login_state.dart';
 
@@ -28,73 +33,95 @@ class _LoginScreenContent extends StatefulWidget {
 }
 
 class _LoginScreenContentState extends State<_LoginScreenContent> {
-  Future<void> _signInWithEmailAndPassword() async {}
-
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
             padding: .symmetric(horizontal: 24),
-            child: Column(
-              crossAxisAlignment: .start,
-              children: [
-                Text(
-                  'Sprinter',
-                  style: TextStyle(
-                    fontSize: 32,
-                    fontWeight: .bold,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
+            child: Consumer<LoginState>(
+              builder: (context, state, _) {
+                return Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    Text(
+                      'Sprinter',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: .bold,
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
 
-                const SizedBox(height: 16),
+                    const SizedBox(height: 16),
 
-                Text(
-                  'Log in the app to start to do activities',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: colorScheme.onSurface.withValues(alpha: 0.6),
-                  ),
-                ),
+                    Text(
+                      l10n!.loginSubtitle,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: colorScheme.onSurface.withValues(alpha: 0.6),
+                      ),
+                    ),
 
-                const SizedBox(height: 24),
+                    const SizedBox(height: 24),
 
-                DefaultTextField(label: 'Email', icon: Icons.email_outlined),
+                    DefaultTextField(
+                      label: l10n.email,
+                      icon: Icons.email_outlined,
+                    ),
 
-                const SizedBox(height: 8),
+                    const SizedBox(height: 8),
 
-                DefaultTextField(
-                  label: 'Password',
-                  icon: Icons.lock_outlined,
-                  isPassword: true,
-                ),
+                    DefaultTextField(
+                      label: l10n.password,
+                      icon: Icons.lock_outlined,
+                      isPassword: true,
+                    ),
 
-                const SizedBox(height: 16),
+                    const SizedBox(height: 16),
 
-                _ForgotYourPassword(),
+                    _ForgotYourPassword(),
 
-                const SizedBox(height: 16),
+                    const SizedBox(height: 16),
 
-                DefaultButton(
-                  callback: _signInWithEmailAndPassword,
-                  text: 'Log In',
-                ),
+                    DefaultButton(
+                      callback: () async {
+                        final result = await state.attemptLogin();
 
-                const SizedBox(height: 16),
+                        if (!context.mounted) {
+                          return;
+                        }
 
-                AuthenticationDivider(),
+                        if (result is Failure<void, AuthenticationError>) {
+                          showErrorModal(
+                            context,
+                            message: result.error.translate(l10n),
+                          );
+                          return;
+                        }
 
-                const SizedBox(height: 16),
+                        context.go(AppRoutes.home);
+                      },
+                      text: l10n.loginAction,
+                    ),
 
-                AuthenticationRedirectRow(
-                  redirectToRegister: true,
-                  callback: () => context.push('/register'),
-                ),
-              ],
+                    const SizedBox(height: 16),
+
+                    AuthenticationDivider(),
+
+                    const SizedBox(height: 16),
+
+                    AuthenticationRedirectRow(
+                      redirectToRegister: true,
+                      callback: () => context.push(AppRoutes.register),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),
@@ -109,6 +136,7 @@ class _ForgotYourPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return SizedBox(
       width: double.infinity,
@@ -121,8 +149,8 @@ class _ForgotYourPassword extends StatelessWidget {
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           alignment: Alignment.centerRight,
         ),
-        child: const Text(
-          'Forgot your password?',
+        child: Text(
+          l10n!.forgotYourPassword,
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
         ),
       ),

@@ -10,5 +10,16 @@
   "weakPasswordError": "Sua senha é muito fraca. Use uma combinação de letras maiúsculas, minúsculas, números e caracteres especiais.",
   "userAlreadyExistsError": "Já existe uma conta com este e-mail. Tente fazer login ou use um e-mail diferente para se cadastrar.",
   "outOfStockError": "Este produto está indisponível no momento. Verifique novamente mais tarde ou escolha um produto diferente.",
-  "unauthorizedError": "Você não tem permissão para realizar esta ação. Faça login com a conta correta."
+  "unauthorizedError": "Você não tem permissão para realizar esta ação. Faça login com a conta correta.",
+  "loginSubtitle": "Faça login no aplicativo para começar a realizar atividades.",
+  "email": "Email",
+  "password": "Senha",
+  "name": "Nome",
+  "loginAction": "Entrar",
+  "forgotYourPassword": "Esqueceu sua senha?",
+  "or": "ou",
+  "noAccountQuestion": "Não tem uma conta?",
+  "hasAccountQuestion": "Já tem uma conta?",
+  "signUp": "Cadastre-se",
+  "signIn": "Entrar"
 }
