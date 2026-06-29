@@ -94,4 +94,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dismiss => 'Dismiss';
+
+  @override
+  String get registerSubtitle => 'Create an account to start doing activities.';
 }

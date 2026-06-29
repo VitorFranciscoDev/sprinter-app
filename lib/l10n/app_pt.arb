@@ -23,5 +23,6 @@
   "signUp": "Cadastre-se",
   "signIn": "Entrar",
   "defaultErrorMessage": "Ocorreu um erro.",
-  "dismiss": "Dispensar"
+  "dismiss": "Dispensar",
+  "registerSubtitle": "Crie uma conta para começar a realizar atividades."
 }

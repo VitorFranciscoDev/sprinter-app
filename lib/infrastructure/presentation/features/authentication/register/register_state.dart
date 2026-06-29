@@ -9,9 +9,6 @@ class RegisterState with ChangeNotifier {
   /// Defines the loading state of Register Screen
   var loading = false;
 
-  /// Defines if the request returned an error
-  AuthenticationError? error;
-
   /// Name field controller
   final nameController = TextEditingController();
 
@@ -31,9 +28,8 @@ class RegisterState with ChangeNotifier {
   final passwordNode = FocusNode();
 
   /// Attempts to register the user with the given credentials
-  Future<void> attemptRegister() async {
+  Future<Result<void, AuthenticationError>> attemptRegister() async {
     loading = true;
-    error = null;
     notifyListeners();
 
     final credentials = UserCredentials(
@@ -42,12 +38,11 @@ class RegisterState with ChangeNotifier {
       password: passwordController.text.trim(),
     );
 
-    final response = await authenticationUseCase.attemptRegister(credentials);
-    if (response is Failure<void, AuthenticationError>) {
-      error = response.error;
+    try {
+      return await authenticationUseCase.attemptRegister(credentials);
+    } finally {
+      loading = false;
+      notifyListeners();
     }
-
-    loading = false;
-    notifyListeners();
   }
 }

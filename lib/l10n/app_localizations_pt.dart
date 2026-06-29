@@ -95,4 +95,8 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get dismiss => 'Dispensar';
+
+  @override
+  String get registerSubtitle =>
+      'Crie uma conta para começar a realizar atividades.';
 }

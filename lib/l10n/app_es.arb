@@ -23,5 +23,6 @@
   "signUp": "Registrarse",
   "signIn": "Iniciar sesión",
   "defaultErrorMessage": "Se ha producido un error.",
-  "dismiss": "Descartar"
+  "dismiss": "Descartar",
+  "registerSubtitle": "Crea una cuenta para empezar a realizar actividades."
 }

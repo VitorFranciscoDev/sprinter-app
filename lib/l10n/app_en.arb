@@ -23,5 +23,6 @@
   "signUp": "Sign up",
   "signIn": "Sign in",
   "defaultErrorMessage": "An error has occurred.",
-  "dismiss": "Dismiss"
+  "dismiss": "Dismiss",
+  "registerSubtitle": "Create an account to start doing activities."
 }
