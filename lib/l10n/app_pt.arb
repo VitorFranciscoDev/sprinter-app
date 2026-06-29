@@ -21,5 +21,7 @@
   "noAccountQuestion": "Não tem uma conta?",
   "hasAccountQuestion": "Já tem uma conta?",
   "signUp": "Cadastre-se",
-  "signIn": "Entrar"
+  "signIn": "Entrar",
+  "defaultErrorMessage": "Ocorreu um erro.",
+  "dismiss": "Dispensar"
 }

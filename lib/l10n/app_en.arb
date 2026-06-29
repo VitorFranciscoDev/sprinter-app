@@ -21,5 +21,7 @@
   "noAccountQuestion": "Don't have an account?",
   "hasAccountQuestion": "Already have an account?",
   "signUp": "Sign up",
-  "signIn": "Sign in"
+  "signIn": "Sign in",
+  "defaultErrorMessage": "An error has occurred.",
+  "dismiss": "Dismiss"
 }

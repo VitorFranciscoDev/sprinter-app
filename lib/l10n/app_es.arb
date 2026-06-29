@@ -21,5 +21,7 @@
   "noAccountQuestion": "¿No tienes cuenta?",
   "hasAccountQuestion": "¿Ya tienes cuenta?",
   "signUp": "Registrarse",
-  "signIn": "Iniciar sesión"
+  "signIn": "Iniciar sesión",
+  "defaultErrorMessage": "Se ha producido un error.",
+  "dismiss": "Descartar"
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sprinter/l10n/app_localizations.dart';
 
 /// A compact error modal: small icon + headline on the top-left,
 /// supporting body text below, and a single dismiss action bottom-right.
@@ -8,7 +9,6 @@ import 'package:flutter/material.dart';
 /// showDialog(
 ///   context: context,
 ///   builder: (_) => ErrorModal(
-///     title: "Couldn't complete that",
 ///     message: "Something went wrong on our end. Try again in a moment.",
 ///   ),
 /// );
@@ -17,13 +17,13 @@ class ErrorModal extends StatelessWidget {
   const ErrorModal({
     super.key,
     required this.message,
-    this.dismissLabel = 'Dismiss',
+    this.dismissLabel,
     this.onDismiss,
     this.icon = Icons.warning_amber_rounded,
   });
 
   final String message;
-  final String dismissLabel;
+  final String? dismissLabel;
   final VoidCallback? onDismiss;
   final IconData icon;
 
@@ -31,6 +31,7 @@ class ErrorModal extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final l10n = AppLocalizations.of(context);
 
     return Dialog(
       backgroundColor: colorScheme.surface,
@@ -48,7 +49,7 @@ class ErrorModal extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    'An error has occurred.',
+                    l10n!.defaultErrorMessage,
                     style: textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: colorScheme.onSurface,
@@ -82,7 +83,7 @@ class ErrorModal extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  dismissLabel,
+                  dismissLabel ?? l10n.dismiss,
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -101,7 +102,7 @@ class ErrorModal extends StatelessWidget {
 Future<void> showErrorModal(
   BuildContext context, {
   required String message,
-  String dismissLabel = 'Dismiss',
+  String? dismissLabel,
   VoidCallback? onDismiss,
   IconData icon = Icons.warning_amber_rounded,
 }) {

@@ -237,6 +237,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign in'**
   String get signIn;
+
+  /// No description provided for @defaultErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'An error has occurred.'**
+  String get defaultErrorMessage;
+
+  /// No description provided for @dismiss.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismiss'**
+  String get dismiss;
 }
 
 class _AppLocalizationsDelegate

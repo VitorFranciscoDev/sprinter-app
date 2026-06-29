@@ -89,4 +89,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get signIn => 'Entrar';
+
+  @override
+  String get defaultErrorMessage => 'Ocorreu um erro.';
+
+  @override
+  String get dismiss => 'Dispensar';
 }

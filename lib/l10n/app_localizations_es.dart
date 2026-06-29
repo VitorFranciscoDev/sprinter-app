@@ -89,4 +89,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get signIn => 'Iniciar sesión';
+
+  @override
+  String get defaultErrorMessage => 'Se ha producido un error.';
+
+  @override
+  String get dismiss => 'Descartar';
 }
