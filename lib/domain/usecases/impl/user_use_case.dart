@@ -5,11 +5,11 @@ import 'package:sprinter/domain/usecases/user.dart';
 import 'package:sprinter/infrastructure/repositories/user.dart';
 
 UserUseCase newUserUseCase(UserRepository userRepository) {
-  return _UserUseCase(userRepository: userRepository);
+  return _UserUseCase(userRepository);
 }
 
 class _UserUseCase implements UserUseCase {
-  const _UserUseCase({required this._userRepository});
+  const _UserUseCase(this._userRepository);
   
   final UserRepository _userRepository;
 
