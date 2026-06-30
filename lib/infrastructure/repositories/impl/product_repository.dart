@@ -29,7 +29,7 @@ class _ProductRepository implements ProductRepository {
 
     try {
       final url = Uri.https(BuildFlags.baseURL, '/api/product/list', params);
-      final token = _storage.readString(StorageKeys.authToken);
+      final token = await _storage.readString(StorageKeys.authToken);
 
       final response = await http.get(
         url,
@@ -50,7 +50,7 @@ class _ProductRepository implements ProductRepository {
         };
       }
 
-      return body.map((product) => Product.fromJSON(product)).toList();
+      return .success(body.map((product) => Product.fromJSON(product)).toList());
     } catch (e, stackTrace) {
       logger.e(
         "failed to list paginated products",
