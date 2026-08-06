@@ -1,21 +1,40 @@
+import 'package:flutter/cupertino.dart';
+
 /// Represents the possible types of activity.
 enum ActivityType {
+  /// Represents an "walking" activity.
   walking,
+
+  /// Represents an "running" activity.
   running,
-  cycling,
+
+  /// Represents an "cycling" activity.
+  cycling;
+
+  @override
+  String toString() {
+    return switch (this) {
+      .walking => 'Walk',
+      .running => 'Run',
+      .cycling => 'Cycling',
+    };
+  }
 }
 
-/// Represents an activity made by the user.
-final class Activity {
+/// Represents a new activity created by the user.
+@immutable
+final class NewActivity {
   /// Standard constructor.
-  const Activity({
-    required this.id,
-    required this.type,
-  });
-
-  /// Unique identifier for the activity.
-  final int id;
+  const NewActivity({required this.activityType, required this.startDate});
 
   /// The type for the activity made.
-  final ActivityType type;
+  final ActivityType activityType;
+
+  /// The date the activity started.
+  final DateTime startDate;
+
+  /// Transforms an [NewActivity] in a JSON.
+  Map<String, dynamic> toJSON() {
+    return {'activity_type': activityType, 'start_date': startDate};
+  }
 }

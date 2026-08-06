@@ -10,6 +10,7 @@ import 'package:sprinter/infrastructure/presentation/theme.dart';
 import 'l10n/app_localizations.dart';
 
 Future<void> main() async {
+  // Initializes widget binding before running the app
   WidgetsFlutterBinding.ensureInitialized();
 
   // Add native splash screen
@@ -17,10 +18,6 @@ Future<void> main() async {
 
   // Initialize use cases
   initialize();
-
-  // Initialize app state
-  final appState = AppState();
-  await appState.initialize();
 
   // Remove native splash screen
   FlutterNativeSplash.remove();

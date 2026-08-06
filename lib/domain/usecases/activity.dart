@@ -8,8 +8,8 @@ abstract class ActivityUseCase {
   Future<Result<void, ActivityError>> startActivity(ActivityType type);
 
   /// Ends the current activity.
-  Future<Result<void, ActivityError>> endActivity(Activity activity);
+  Future<Result<void, ActivityError>> endActivity(NewActivity activity);
 
   /// Checks if the user has an current activity when he logs in the application.
-  Future<Result<Activity?, ActivityError>> checkIfHasCurrentActivity(int userID);
+  Future<Result<NewActivity?, ActivityError>> checkIfHasCurrentActivity(int userID);
 }

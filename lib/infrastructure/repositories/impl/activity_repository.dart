@@ -54,7 +54,7 @@ class _ActivityRepository implements ActivityRepository {
   }
 
   @override
-  Future<Result<void, ActivityError>> endActivity(Activity activity) async {
+  Future<Result<void, ActivityError>> endActivity(NewActivity activity) async {
     try {
       final url = Uri.parse('${BuildFlags.baseURL}/api/activity/end');
       final token = _storage.readString(StorageKeys.authToken);
@@ -86,7 +86,7 @@ class _ActivityRepository implements ActivityRepository {
   }
 
   @override
-  Future<Result<Activity?, ActivityError>> checkIfHasCurrentActivity(
+  Future<Result<NewActivity?, ActivityError>> checkIfHasCurrentActivity(
     int userID,
   ) async {
     try {

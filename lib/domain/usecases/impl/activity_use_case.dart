@@ -19,12 +19,12 @@ class _ActivityUseCase implements ActivityUseCase {
   }
 
   @override
-  Future<Result<void, ActivityError>> endActivity(Activity activity) async {
+  Future<Result<void, ActivityError>> endActivity(NewActivity activity) async {
     return await _activityRepository.endActivity(activity);
   }
 
   @override
-  Future<Result<Activity?, ActivityError>> checkIfHasCurrentActivity(
+  Future<Result<NewActivity?, ActivityError>> checkIfHasCurrentActivity(
     int userID,
   ) async {
     return await _activityRepository.checkIfHasCurrentActivity(userID);

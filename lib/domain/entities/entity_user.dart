@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 
-/// Represents the application user
+/// Represents the application user.
 @immutable
 final class User {
-  /// Standard constructor
+  /// Standard constructor.
   const User({
     required this.id,
     required this.name,
@@ -13,25 +13,25 @@ final class User {
     required this.imageURL,
   });
 
-  /// Unique identifier for the user
+  /// Unique identifier for the user.
   final int id;
 
-  /// Name of the user
+  /// Name of the user.
   final String name;
 
-  /// Email of the user
+  /// Email of the user.
   final String email;
 
-  /// Username of the user profile
+  /// Username of the user profile.
   final String username;
 
-  /// Biography of the user profile
+  /// Biography of the user profile.
   final String biography;
 
-  /// Profile picture of the user
+  /// Profile picture of the user.
   final String imageURL;
 
-  /// Returns a [User] from the given JSON
+  /// Returns a [User] from the given JSON.
   factory User.fromJSON(Map<String, dynamic> json) {
     return User(
       id: json['id'],
@@ -43,6 +43,7 @@ final class User {
     );
   }
 
+  /// Returns an JSON from a [User].
   Map<String, dynamic> toJSON() {
     return {
       'id': id,
@@ -55,26 +56,26 @@ final class User {
   }
 }
 
-/// Represents the user credentials for authentication actions
+/// Represents the user credentials for authentication actions.
 @immutable
 final class UserCredentials {
-  /// Standard constructor
+  /// Standard constructor.
   const UserCredentials({
     this.name,
     required this.email,
     required this.password,
   });
 
-  /// Name of the user
+  /// Name of the user.
   final String? name;
 
-  /// Email of the user
+  /// Email of the user.
   final String email;
 
-  /// Password of the user
+  /// Password of the user.
   final String password;
 
-  /// Returns JSON from [UserCredentials]
+  /// Returns JSON from [UserCredentials].
   Map<String, dynamic> toJSON() {
     return {'name': name, 'email': email, 'password': password};
   }
